@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="chargepointModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="order_code" />
+    </Key>
+    <Property Name="order_code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" />
+    <Property Name="product_category_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="product_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="chargepointEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="product_category" EntityType="Self.product_category" />
+  </EntityContainer>
+</Schema>

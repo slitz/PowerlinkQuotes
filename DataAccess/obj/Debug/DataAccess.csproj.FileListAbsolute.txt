@@ -1,0 +1,11 @@
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\DataAccess.dll.config
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\DataAccess.dll
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\DataAccess.pdb
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\EntityFramework.dll
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\MySql.Data.Entity.EF6.dll
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\EntityFramework.xml
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Debug\DataAccess.dll
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Debug\DataAccess.pdb
+c:\users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
