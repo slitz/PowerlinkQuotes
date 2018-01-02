@@ -8,18 +8,83 @@
 @using (Html.BeginForm())
 {
     <section class="container">
-        <div class="row" id="stations-selector">
+        <div class="row" id="stations-listbox">
             <div class="col-md-12">
                 <div class="tab-pane fade in active">
                     <div class="container-fluid">
                         <h4 class="qualification-title">Select Stations</h4>
                         <div>
+                            @Html.HiddenFor(m => m.NavCategory, new { @Value = "stations" })
                             @Html.ListBoxFor(m => m.SelectedProductsList, Model.ProductDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
                                 {"style", "width:100%;height:150px"}, {"id", "stations-listbox"}})
                         </div>
-                        <br />
-                        <div class="container-fluid" style="height: 55px;margin-bottom:0;text-align:center">
-                           <input type="submit" id="add-stations-btn" class="btn btn-primary" value="Add Selected Stations" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row" id="kits-listbox" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h4 class="qualification-title">Select Kits</h4>
+                        <div>
+                            @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
+                            @Html.HiddenFor(m => m.SelectedProductsList)
+                            @Html.ListBoxFor(m => m.SelectedKitsList, Model.KitDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
+                                {"style", "width:100%;height:150px"}, {"id", "kits-listbox"}})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row" id="cloud-plans-listbox" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h4 class="qualification-title">Select Cloud Plans</h4>
+                        <div>
+                            @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
+                            @Html.HiddenFor(m => m.SelectedProductsList)
+                            @Html.ListBoxFor(m => m.SelectedCloudPlansList, Model.CloudPlanDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
+                                {"style", "width:100%;height:150px"}, {"id", "cloud-plans-listbox"}})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row" id="assure-plans-listbox" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h4 class="qualification-title">Select Assure Plans</h4>
+                        <div>
+                            @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
+                            @Html.HiddenFor(m => m.SelectedProductsList)
+                            @Html.ListBoxFor(m => m.SelectedAssurePlansList, Model.AssurePlanDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
+                                {"style", "width:100%;height:150px"}, {"id", "assure-plans-listbox"}})
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row" id="activation-plans-listbox" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h4 class="qualification-title">Select Activation & Validation Items</h4>
+                        <div>
+                            @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
+                            @Html.HiddenFor(m => m.SelectedProductsList)
+                            @Html.ListBoxFor(m => m.SelectedActivationItemsList, Model.ActivationDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
+                                {"style", "width:100%;height:150px"}, {"id", "activation-items-listbox"}})
                         </div>
                     </div>
                 </div>
@@ -28,16 +93,15 @@
     </section>
 }
 
+<br />
+<br />
 <section class="container">
-    <div class="row" id="kits-selector" style="visibility:hidden">
-        <div class="col-md-12">
-            <div class="tab-pane fade in active">
-                <div class="container-fluid">
-                    <h4 class="qualification-title">Add Kits</h4>
-                    <div>
-                        @Html.ListBoxFor(m => m.SelectedKitsList, Model.KitDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                            {"style", "width:100%;height:150px"}, {"id", "kits-listbox"}})
-                    </div>
+    <div class="navbar navbar-default" id="next-nav-panel" style="padding:0;display:block">
+        <div class="container-fluid" style="padding-top:8px">
+            <div class="navbar-header" style="float:none">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <input type="button" id="previous-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('previous')" style="float:left" value="&laquo; Previous" />
+                    <input type="button" id="next-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('next')" style="float:right" value="Next &raquo;" />
                 </div>
             </div>
         </div>
@@ -45,7 +109,7 @@
 </section>
 
 <section class="container">
-    <div class="row" id="stations">
+    <div class="row" id="station-quantity" style="visibility:hidden">
         <div class="col-md-12">
             <div class="tab-pane fade in active">
                 <div class="container-fluid">
@@ -70,15 +134,28 @@
 </section>
 
 <section class="container">
-    <nav id="next-nav-panel" class="navbar navbar-default" style="padding:0;visibility:hidden">
-        <div class="container-fluid" style="padding-top:8px">
-            <div class="navbar-header" style="float:right">
-                <div id="navbar" class="navbar-collapse collapse">
-                    <input type="submit" id="next-btn" class="btn btn-default" style="float:right" value="Next >>"/>
+    <div class="row" id="kit-quantity" style="visibility:hidden">
+        <div class="col-md-12">
+            <div class="tab-pane fade in active">
+                <div class="container-fluid">
+                    <h4 class="qualification-title">Set Quantities</h4>
+                    <table id="kits-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
 </section>
 
 @section scripts
@@ -86,49 +163,285 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            document.getElementById("stations").style.display = "none";
-            document.getElementById("kits-selector").style.display = "none";
-            document.getElementById("stations-nav-text").style.fontWeight = "bold";
-
+            var navCategory = @Html.Raw(Json.Encode(Model.NavCategory));
             var stationsTableData = @Html.Raw(Json.Encode(Model.SelectedProductsData));
+            var kitsTableData = @Html.Raw(Json.Encode(Model.SelectedKitsData));
 
-            if(stationsTableData != null)
-            {
-                if(stationsTableData.length > 0)
-                {
-                    document.getElementById("stations").style.display = "block";
-                    document.getElementById("next-nav-panel").style.visibility = "visible";
-                }
-
-                var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-                var stationsTableBody = $("#stations-table tbody");
-                if (stationsTableData.length > 0) {
-                    stationsTableBodyRowsHtml = "";
-                }
-                for (var i = 0; i < stationsTableData.length; i++) {
-                    var stationsTableRowHtml = "<tr><td>" + stationsTableData[i].OrderCode + "</td><td>" + 
-                        stationsTableData[i].Description + "</td><td style='text-align:center'>" + stationsTableData[i].Price + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    stationsTableBodyRowsHtml += stationsTableRowHtml;
-                }
-
-                stationsTableBody.html(stationsTableBodyRowsHtml);
-            }
+            document.getElementById("stations-listbox").style.display = "block";
+            document.getElementById("stations-nav-text").style.fontWeight = "bold";
+            document.getElementById("previous-btn").style.display = "none";
 
             $("#stations-nav-text").click(function(e) {
-                document.getElementById("stations-selector").style.display = "block";
-                document.getElementById("kits-selector").style.display = "none";
+                document.getElementById("stations-listbox").style.display = "block";
+                document.getElementById("kits-listbox").style.display = "none";
+                document.getElementById("cloud-plans-listbox").style.display = "none";
+                document.getElementById("assure-plans-listbox").style.display = "none";
+                document.getElementById("activation-plans-listbox").style.display = "none";
+
                 document.getElementById("stations-nav-text").style.fontWeight = "bold";
                 document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+
+                document.getElementById("kit-quantity").style.display = "none";
+
+                document.getElementById("next-btn").style.display = "block";
+                document.getElementById("previous-btn").style.display = "none";
             });
 
             $("#kits-nav-text").click(function(e) {
-                document.getElementById("kits-selector").style.display = "block";
-                document.getElementById("stations-selector").style.display = "none";
-                document.getElementById("kits-nav-text").style.fontWeight = "bold";
+                document.getElementById("cloud-plans-listbox").style.display = "none";
+                document.getElementById("kits-listbox").style.display = "block";
+                document.getElementById("kits-listbox").style.visibility = "visible";
+                document.getElementById("stations-listbox").style.display = "none";
+                document.getElementById("assure-plans-listbox").style.display = "none";
+                document.getElementById("activation-plans-listbox").style.display = "none";
+
                 document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                document.getElementById("kits-nav-text").style.fontWeight = "bold";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+
+                document.getElementById("station-quantity").style.visibility = "hidden";
+                document.getElementById("station-quantity").style.display = "none";
+
+                document.getElementById("next-btn").style.display = "block";
+                document.getElementById("previous-btn").style.display = "block";
             });
 
-        })
+            $("#cloud-plans-nav-text").click(function(e) {
+                document.getElementById("stations-listbox").style.display = "none";
+                document.getElementById("kits-listbox").style.display = "none";
+                document.getElementById("cloud-plans-listbox").style.display = "block";
+                document.getElementById("cloud-plans-listbox").style.visibility = "visible";
+                document.getElementById("assure-plans-listbox").style.display = "none";
+                document.getElementById("activation-plans-listbox").style.display = "none";
+
+                document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "bold";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+
+                document.getElementById("station-quantity").style.visibility = "hidden";
+                document.getElementById("station-quantity").style.display = "none";
+                document.getElementById("kit-quantity").style.visibility = "hidden";
+                document.getElementById("kit-quantity").style.display = "none";
+
+                document.getElementById("next-btn").style.display = "block";
+                document.getElementById("previous-btn").style.display = "block";
+            });
+
+            $("#assure-plans-nav-text").click(function(e) {
+                document.getElementById("stations-listbox").style.display = "none";
+                document.getElementById("kits-listbox").style.display = "none";
+                document.getElementById("cloud-plans-listbox").style.display = "none";
+                document.getElementById("assure-plans-listbox").style.display = "block";
+                document.getElementById("assure-plans-listbox").style.visibility = "visible";
+                document.getElementById("activation-plans-listbox").style.display = "none";
+
+                document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "bold";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+
+                document.getElementById("station-quantity").style.visibility = "hidden";
+                document.getElementById("station-quantity").style.display = "none";
+                document.getElementById("kit-quantity").style.visibility = "hidden";
+                document.getElementById("kit-quantity").style.display = "none";
+
+                document.getElementById("next-btn").style.display = "block";
+                document.getElementById("previous-btn").style.display = "block";
+            });
+
+            $("#activation-plans-nav-text").click(function(e) {
+                document.getElementById("stations-listbox").style.display = "none";
+                document.getElementById("kits-listbox").style.display = "none";
+                document.getElementById("cloud-plans-listbox").style.display = "none";
+                document.getElementById("assure-plans-listbox").style.display = "none";
+                document.getElementById("activation-plans-listbox").style.display = "block";
+                document.getElementById("activation-plans-listbox").style.visibility = "visible";
+
+                document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "bold";
+                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+
+                document.getElementById("station-quantity").style.visibility = "hidden";
+                document.getElementById("station-quantity").style.display = "none";
+                document.getElementById("kit-quantity").style.visibility = "hidden";
+                document.getElementById("kit-quantity").style.display = "none";
+
+                document.getElementById("next-btn").style.display = "block";
+                document.getElementById("previous-btn").style.display = "block";
+            });
+
+            $("#quantities-nav-text").click(function(e) {
+                document.getElementById("stations-listbox").style.display = "none";
+                document.getElementById("kits-listbox").style.display = "none";
+                document.getElementById("cloud-plans-listbox").style.display = "none";
+                document.getElementById("assure-plans-listbox").style.display = "none";
+                document.getElementById("activation-plans-listbox").style.display = "none";
+
+                document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                document.getElementById("quantities-nav-text").style.fontWeight = "bold";
+
+                document.getElementById("next-btn").style.display = "none";
+                document.getElementById("previous-btn").style.display = "block";
+            });
+
+        });
+
+        function determineCurrentNavAndShowAdjacentNavControls(direction) {
+            
+            var currentNav;
+            var parent = document.getElementById("main-navbar");
+            var childAnchors = parent.getElementsByTagName('a');
+            for (i = 0; i < childAnchors.length; ++i)
+            {
+                if(childAnchors[i].getAttribute('style') == "font-weight: bold;")
+                {
+                    currentNav = childAnchors[i].innerText;
+                    break;
+                }
+            }
+            
+            showAdjacentNavItems(currentNav, direction);
+        }
+
+        function showAdjacentNavItems(currentNav, direction) {
+            if(currentNav !=null && direction != null) {
+                var forward = true;
+                if(direction != "next") {
+                    forward = false;
+                };
+                switch(currentNav) {
+                    case "1. Stations":
+                        document.getElementById("stations-listbox").style.display = "none";
+                        document.getElementById("stations-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("kits-listbox").style.display = "block";
+                            document.getElementById("kits-listbox").style.visibility = "visible";
+                            document.getElementById("kits-nav-text").style.fontWeight = "bold";
+                            document.getElementById("previous-btn").style.display = "block";
+                        } else {
+                            document.getElementById("quantities-nav-text").style.fontWeight = "bold";
+                        }
+                        break;
+                    case "2. Kits":
+                        document.getElementById("kits-listbox").style.display = "none";
+                        document.getElementById("kits-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("cloud-plans-listbox").style.display = "block";
+                            document.getElementById("cloud-plans-listbox").style.visibility = "visible";
+                            document.getElementById("cloud-plans-nav-text").style.fontWeight = "bold";
+                        } else {
+                            document.getElementById("stations-listbox").style.display = "block";
+                            document.getElementById("stations-listbox").style.visibility = "visible";
+                            document.getElementById("stations-nav-text").style.fontWeight = "bold";
+                            document.getElementById("previous-btn").style.display = "none";
+                        }
+                        break;
+                    case "3. Cloud Plans":
+                        document.getElementById("cloud-plans-listbox").style.display = "none";
+                        document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("assure-plans-listbox").style.display = "block";
+                            document.getElementById("assure-plans-listbox").style.visibility = "visible";
+                            document.getElementById("assure-plans-nav-text").style.fontWeight = "bold";
+                        } else {
+                            document.getElementById("kits-listbox").style.display = "block";
+                            document.getElementById("kits-listbox").style.visibility = "visible";
+                            document.getElementById("kits-nav-text").style.fontWeight = "bold";
+                        }
+                        break;
+                    case "4. Assure Plans":
+                        document.getElementById("assure-plans-listbox").style.display = "none";
+                        document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("activation-plans-listbox").style.display = "block";
+                            document.getElementById("activation-plans-listbox").style.visibility = "visible";
+                            document.getElementById("activation-plans-nav-text").style.fontWeight = "bold";
+                        } else {
+                            document.getElementById("cloud-plans-listbox").style.display = "block";
+                            document.getElementById("cloud-plans-listbox").style.visibility = "visible";
+                            document.getElementById("cloud-plans-nav-text").style.fontWeight = "bold";
+                        }
+                        break;
+                    case "5. Activation & Validation":
+                        document.getElementById("activation-plans-listbox").style.display = "none";
+                        document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("quantities-nav-text").style.fontWeight = "bold";
+                            document.getElementById("next-btn").style.display = "none";
+                        } else {
+                            document.getElementById("assure-plans-listbox").style.display = "block";
+                            document.getElementById("assure-plans-listbox").style.visibility = "visible";
+                            document.getElementById("assure-plans-nav-text").style.fontWeight = "bold";
+                        }
+                        break;
+                    case "6. Quantities":
+                        document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+                        if(forward) {
+                            document.getElementById("quantities-nav-text").style.fontWeight = "bold";
+                        } else {
+                            document.getElementById("activation-plans-listbox").style.display = "block";
+                            document.getElementById("activation-plans-listbox").style.visibility = "visible";
+                            document.getElementById("activation-plans-nav-text").style.fontWeight = "bold";
+                            document.getElementById("next-btn").style.display = "block";
+                        }
+                        break;
+                    default:
+                        document.getElementById("station-quantity").style.display = "none";
+                        document.getElementById("kit-quantity").style.display = "none";
+                        document.getElementById("kits-listbox").style.display = "none";
+                        document.getElementById("stations-nav-text").style.fontWeight = "bold";           
+                }}
+        };
+
+        function buildStationsTable(stationsTableData) {
+            var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+            var stationsTableBody = $("#stations-table tbody");
+            if (stationsTableData.length > 0) {
+                stationsTableBodyRowsHtml = "";
+            }
+            for (var i = 0; i < stationsTableData.length; i++) {
+                var stationsTableRowHtml = "<tr><td>" + stationsTableData[i].OrderCode + "</td><td>" + 
+                    stationsTableData[i].Description + "</td><td style='text-align:center'>" + stationsTableData[i].Price + 
+                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                stationsTableBodyRowsHtml += stationsTableRowHtml;
+            }
+
+            stationsTableBody.html(stationsTableBodyRowsHtml);
+        };
+
+        function buildKitsTable(kitsTableData) {
+            var kitsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+            var kitsTableBody = $("#kits-table tbody");
+            if (kitsTableData.length > 0) {
+                kitsTableBodyRowsHtml = "";
+            }
+            for (var i = 0; i < kitsTableData.length; i++) {
+                var kitsTableRowHtml = "<tr><td>" + kitsTableData[i].OrderCode + "</td><td>" + 
+                    kitsTableData[i].Description + "</td><td style='text-align:center'>" + kitsTableData[i].Price + 
+                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                kitsTableBodyRowsHtml += kitsTableRowHtml;
+            }
+
+            kitsTableBody.html(kitsTableBodyRowsHtml);
+        }
     </script>
 }

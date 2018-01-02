@@ -32,10 +32,11 @@ namespace UI.Controllers
             var quoteBuilderModel = new QuotingToolModel();
             quoteBuilderModel.ProductDataList = GetData(1);
             quoteBuilderModel.KitDataList = GetData(19);
-            if (quoteBuilderModel.SelectedProductsList == null)
-            {
-                quoteBuilderModel.SelectedProductsList = new List<string>();
-            }
+            quoteBuilderModel.CloudPlanDataList = GetData(2);
+            quoteBuilderModel.AssurePlanDataList = GetData(4);
+            quoteBuilderModel.ActivationDataList = GetData(15);
+            quoteBuilderModel.SelectedProductsList = new List<string>();
+            quoteBuilderModel.NavCategory = "stations"; // stations is the default category when the page loads
             return View(quoteBuilderModel);
         }
 
@@ -47,6 +48,7 @@ namespace UI.Controllers
                 model.ProductDataList = GetData(1);
                 model.KitDataList = GetData(19);
                 model.SelectedProductsData = GetSelectedItemData(model.SelectedProductsList);
+                model.SelectedKitsData = GetSelectedItemData(model.SelectedKitsList);
             }
             return View(model);
         }
