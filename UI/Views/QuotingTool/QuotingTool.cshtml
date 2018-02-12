@@ -16,7 +16,7 @@
                         <div>
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "stations" })
                             @Html.ListBoxFor(m => m.SelectedProductsList, Model.ProductDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "stations-listbox"}})
+                                {"style", "width:100%;height:150px"}, {"id", "stations-listbox-control"}})
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
                             @Html.HiddenFor(m => m.SelectedProductsList)
                             @Html.ListBoxFor(m => m.SelectedKitsList, Model.KitDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "kits-listbox"}})
+                                {"style", "width:100%;height:150px"}, {"id", "kits-listbox-control"}})
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
                             @Html.HiddenFor(m => m.SelectedProductsList)
                             @Html.ListBoxFor(m => m.SelectedCloudPlansList, Model.CloudPlanDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "cloud-plans-listbox"}})
+                                {"style", "width:100%;height:150px"}, {"id", "cloud-plans-listbox-control"}})
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
                             @Html.HiddenFor(m => m.SelectedProductsList)
                             @Html.ListBoxFor(m => m.SelectedAssurePlansList, Model.AssurePlanDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "assure-plans-listbox"}})
+                                {"style", "width:100%;height:150px"}, {"id", "assure-plans-listbox-control"}})
                         </div>
                     </div>
                 </div>
@@ -84,17 +84,154 @@
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
                             @Html.HiddenFor(m => m.SelectedProductsList)
                             @Html.ListBoxFor(m => m.SelectedActivationItemsList, Model.ActivationDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "activation-items-listbox"}})
+                                {"style", "width:100%;height:150px"}, {"id", "activation-items-listbox-control"}})
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-}
+    <section class="container">
+        <div class="row" id="header-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h4 class="qualification-title">Set Quantities</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="container">
+        <div class="row" id="station-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h5 class="qualification-title">Stations</h5>
+                        <table id="stations-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row" id="kit-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h5 class="qualification-title">Kits</h5>
+                        <table id="kits-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="row" id="cloud-plans-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h5 class="qualification-title">Cloud Plans</h5>
+                        <table id="cloud-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="row" id="assure-plans-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h5 class="qualification-title">Assure Plans</h5>
+                        <table id="assure-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container">
+        <div class="row" id="activation-plans-quantity" style="visibility:hidden;display:none">
+            <div class="col-md-12">
+                <div class="tab-pane fade in active">
+                    <div class="container-fluid">
+                        <h5 class="qualification-title">Activation & Validation</h5>
+                        <table id="activation-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th style="text-align:center">Price</th>
+                                    <th style="text-align:center">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @* populate dynamically *@
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
 <br />
 <br />
+
+
 <section class="container">
     <div class="navbar navbar-default" id="next-nav-panel" style="padding:0;display:block">
         <div class="container-fluid" style="padding-top:8px">
@@ -102,56 +239,6 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <input type="button" id="previous-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('previous')" style="float:left" value="&laquo; Previous" />
                     <input type="button" id="next-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('next')" style="float:right" value="Next &raquo;" />
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container">
-    <div class="row" id="station-quantity" style="visibility:hidden">
-        <div class="col-md-12">
-            <div class="tab-pane fade in active">
-                <div class="container-fluid">
-                    <h4 class="qualification-title">Set Quantities</h4>
-                    <table id="stations-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @* populate dynamically *@
-                            </tbody>
-                        </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container">
-    <div class="row" id="kit-quantity" style="visibility:hidden">
-        <div class="col-md-12">
-            <div class="tab-pane fade in active">
-                <div class="container-fluid">
-                    <h4 class="qualification-title">Set Quantities</h4>
-                    <table id="kits-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @* populate dynamically *@
-                            </tbody>
-                        </table>
                 </div>
             </div>
         </div>
@@ -185,7 +272,18 @@
                 document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
                 document.getElementById("quantities-nav-text").style.fontWeight = "normal";
 
+                document.getElementById("header-quantity").style.visibility = "hidden";
+                document.getElementById("header-quantity").style.display = "none";
+                document.getElementById("station-quantity").style.visibility = "hidden";
+                document.getElementById("station-quantity").style.display = "none";
+                document.getElementById("kit-quantity").style.visibility = "hidden";
                 document.getElementById("kit-quantity").style.display = "none";
+                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
+                document.getElementById("cloud-plans-quantity").style.display = "none";
+                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
+                document.getElementById("assure-plans-quantity").style.display = "none";
+                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
+                document.getElementById("activation-plans-quantity").style.display = "none";
 
                 document.getElementById("next-btn").style.display = "block";
                 document.getElementById("previous-btn").style.display = "none";
@@ -206,8 +304,18 @@
                 document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
                 document.getElementById("quantities-nav-text").style.fontWeight = "normal";
 
+                document.getElementById("header-quantity").style.visibility = "hidden";
+                document.getElementById("header-quantity").style.display = "none";
                 document.getElementById("station-quantity").style.visibility = "hidden";
                 document.getElementById("station-quantity").style.display = "none";
+                document.getElementById("kit-quantity").style.visibility = "hidden";
+                document.getElementById("kit-quantity").style.display = "none";
+                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
+                document.getElementById("cloud-plans-quantity").style.display = "none";
+                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
+                document.getElementById("assure-plans-quantity").style.display = "none";
+                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
+                document.getElementById("activation-plans-quantity").style.display = "none";
 
                 document.getElementById("next-btn").style.display = "block";
                 document.getElementById("previous-btn").style.display = "block";
@@ -228,10 +336,18 @@
                 document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
                 document.getElementById("quantities-nav-text").style.fontWeight = "normal";
 
+                document.getElementById("header-quantity").style.visibility = "hidden";
+                document.getElementById("header-quantity").style.display = "none";
                 document.getElementById("station-quantity").style.visibility = "hidden";
                 document.getElementById("station-quantity").style.display = "none";
                 document.getElementById("kit-quantity").style.visibility = "hidden";
                 document.getElementById("kit-quantity").style.display = "none";
+                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
+                document.getElementById("cloud-plans-quantity").style.display = "none";
+                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
+                document.getElementById("assure-plans-quantity").style.display = "none";
+                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
+                document.getElementById("activation-plans-quantity").style.display = "none";
 
                 document.getElementById("next-btn").style.display = "block";
                 document.getElementById("previous-btn").style.display = "block";
@@ -252,10 +368,18 @@
                 document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
                 document.getElementById("quantities-nav-text").style.fontWeight = "normal";
 
+                document.getElementById("header-quantity").style.visibility = "hidden";
+                document.getElementById("header-quantity").style.display = "none";
                 document.getElementById("station-quantity").style.visibility = "hidden";
                 document.getElementById("station-quantity").style.display = "none";
                 document.getElementById("kit-quantity").style.visibility = "hidden";
                 document.getElementById("kit-quantity").style.display = "none";
+                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
+                document.getElementById("cloud-plans-quantity").style.display = "none";
+                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
+                document.getElementById("assure-plans-quantity").style.display = "none";
+                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
+                document.getElementById("activation-plans-quantity").style.display = "none";
 
                 document.getElementById("next-btn").style.display = "block";
                 document.getElementById("previous-btn").style.display = "block";
@@ -276,10 +400,18 @@
                 document.getElementById("activation-plans-nav-text").style.fontWeight = "bold";
                 document.getElementById("quantities-nav-text").style.fontWeight = "normal";
 
+                document.getElementById("header-quantity").style.visibility = "hidden";
+                document.getElementById("header-quantity").style.display = "none";
                 document.getElementById("station-quantity").style.visibility = "hidden";
                 document.getElementById("station-quantity").style.display = "none";
                 document.getElementById("kit-quantity").style.visibility = "hidden";
                 document.getElementById("kit-quantity").style.display = "none";
+                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
+                document.getElementById("cloud-plans-quantity").style.display = "none";
+                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
+                document.getElementById("assure-plans-quantity").style.display = "none";
+                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
+                document.getElementById("activation-plans-quantity").style.display = "none";
 
                 document.getElementById("next-btn").style.display = "block";
                 document.getElementById("previous-btn").style.display = "block";
@@ -301,6 +433,26 @@
 
                 document.getElementById("next-btn").style.display = "none";
                 document.getElementById("previous-btn").style.display = "block";
+
+                // show quantity tables
+                document.getElementById("header-quantity").style.display = "block";
+                document.getElementById("header-quantity").style.visibility = "visible";
+
+                document.getElementById("station-quantity").style.display = "block";
+                document.getElementById("station-quantity").style.visibility = "visible";
+
+                document.getElementById("kit-quantity").style.display = "block";
+                document.getElementById("kit-quantity").style.visibility = "visible";
+
+                document.getElementById("cloud-plans-quantity").style.display = "block";
+                document.getElementById("cloud-plans-quantity").style.visibility = "visible";
+
+                document.getElementById("assure-plans-quantity").style.display = "block";
+                document.getElementById("assure-plans-quantity").style.visibility = "visible";
+
+                document.getElementById("activation-plans-quantity").style.display = "block";
+                document.getElementById("activation-plans-quantity").style.visibility = "visible";
+
             });
 
         });
@@ -412,36 +564,106 @@
                 }}
         };
 
-        function buildStationsTable(stationsTableData) {
+        document.getElementById("quantities-nav-text").addEventListener("click", buildQuantityTables);
+
+        function buildQuantityTables() {
+
+            // stations
+            var selectedStationsItems = document.getElementById("stations-listbox-control");
+            var selectedStationsValues = selectedStationsItems.options[selectedStationsItems.selectedIndex].value;
             var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var stationsTableBody = $("#stations-table tbody");
-            if (stationsTableData.length > 0) {
+            
+            if (selectedStationsValues != null) {
                 stationsTableBodyRowsHtml = "";
             }
-            for (var i = 0; i < stationsTableData.length; i++) {
-                var stationsTableRowHtml = "<tr><td>" + stationsTableData[i].OrderCode + "</td><td>" + 
-                    stationsTableData[i].Description + "</td><td style='text-align:center'>" + stationsTableData[i].Price + 
+            
+            for (var i = 0; i < 1; i++) {
+                var stationsTableRowHtml = "<tr><td>" + selectedStationsValues + "</td><td>" + 
+                    selectedStationsValues + "</td><td style='text-align:center'>" + selectedStationsValues + 
                     "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
                 stationsTableBodyRowsHtml += stationsTableRowHtml;
             }
-
+            
             stationsTableBody.html(stationsTableBodyRowsHtml);
-        };
 
-        function buildKitsTable(kitsTableData) {
+            // kits
+            var selectedKitsItems = document.getElementById("kits-listbox-control");
+            var selectedKitsValues = selectedKitsItems.options[selectedKitsItems.selectedIndex].value;
             var kitsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var kitsTableBody = $("#kits-table tbody");
-            if (kitsTableData.length > 0) {
+            
+            if (selectedKitsValues != null) {
                 kitsTableBodyRowsHtml = "";
             }
-            for (var i = 0; i < kitsTableData.length; i++) {
-                var kitsTableRowHtml = "<tr><td>" + kitsTableData[i].OrderCode + "</td><td>" + 
-                    kitsTableData[i].Description + "</td><td style='text-align:center'>" + kitsTableData[i].Price + 
+            
+            for (var i = 0; i < 1; i++) {
+                var kitsTableRowHtml = "<tr><td>" + selectedKitsValues + "</td><td>" + 
+                    selectedKitsValues + "</td><td style='text-align:center'>" + selectedKitsValues + 
                     "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
                 kitsTableBodyRowsHtml += kitsTableRowHtml;
             }
 
             kitsTableBody.html(kitsTableBodyRowsHtml);
-        }
+
+            // cloud plans
+            var selectedCloudPlanItems = document.getElementById("cloud-plans-listbox-control");
+            var selectedCloudPlanValues = selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex].value;
+            var selectedCloudPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+            var selectedCloudPlansTableBody = $("#cloud-plans-table tbody");
+            
+            if (selectedCloudPlanValues != null) {
+                selectedCloudPlansTableBodyRowsHtml = "";
+            }
+            
+            for (var i = 0; i < 1; i++) {
+                var cloudPlansTableRowHtml = "<tr><td>" + selectedCloudPlanValues + "</td><td>" + 
+                    selectedCloudPlanValues + "</td><td style='text-align:center'>" + selectedCloudPlanValues + 
+                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
+            }
+
+            selectedCloudPlansTableBody.html(selectedCloudPlansTableBodyRowsHtml);
+
+            // assure plans
+            var selectedAssurePlanItems = document.getElementById("assure-plans-listbox-control");
+            var selectedAssurePlanValues = selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex].value;
+            var selectedAssurePlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+            var selectedAssurePlansTableBody = $("#assure-plans-table tbody");
+            
+            if (selectedAssurePlanValues != null) {
+                selectedAssurePlansTableBodyRowsHtml = "";
+            }
+            
+            for (var i = 0; i < 1; i++) {
+                var assurePlansTableRowHtml = "<tr><td>" + selectedAssurePlanValues + "</td><td>" + 
+                    selectedAssurePlanValues + "</td><td style='text-align:center'>" + selectedAssurePlanValues + 
+                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
+            }
+
+            selectedAssurePlansTableBody.html(selectedAssurePlansTableBodyRowsHtml);
+            
+            // activation plans
+            var selectedActivationPlanItems = document.getElementById("activation-items-listbox-control");
+            var selectedActivationPlanValues = selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex].value;
+            var selectedActivationPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+            var selectedActivationPlansTableBody = $("#activation-plans-table tbody");
+            
+            if (selectedActivationPlanValues != null) {
+                selectedActivationPlansTableBodyRowsHtml = "";
+            }
+            
+            for (var i = 0; i < 1; i++) {
+                var activationPlansTableRowHtml = "<tr><td>" + selectedActivationPlanValues + "</td><td>" + 
+                    selectedActivationPlanValues + "</td><td style='text-align:center'>" + selectedActivationPlanValues + 
+                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
+            }
+
+            selectedActivationPlansTableBody.html(selectedActivationPlansTableBodyRowsHtml);
+
+        };
+
     </script>
 }
