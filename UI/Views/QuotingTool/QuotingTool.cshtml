@@ -438,20 +438,20 @@
                 document.getElementById("header-quantity").style.display = "block";
                 document.getElementById("header-quantity").style.visibility = "visible";
 
-                document.getElementById("station-quantity").style.display = "block";
-                document.getElementById("station-quantity").style.visibility = "visible";
+                //document.getElementById("station-quantity").style.display = "block";
+                //document.getElementById("station-quantity").style.visibility = "visible";
 
-                document.getElementById("kit-quantity").style.display = "block";
-                document.getElementById("kit-quantity").style.visibility = "visible";
+                //document.getElementById("kit-quantity").style.display = "block";
+                //document.getElementById("kit-quantity").style.visibility = "visible";
 
-                document.getElementById("cloud-plans-quantity").style.display = "block";
-                document.getElementById("cloud-plans-quantity").style.visibility = "visible";
+                //document.getElementById("cloud-plans-quantity").style.display = "block";
+                //document.getElementById("cloud-plans-quantity").style.visibility = "visible";
 
-                document.getElementById("assure-plans-quantity").style.display = "block";
-                document.getElementById("assure-plans-quantity").style.visibility = "visible";
+                //document.getElementById("assure-plans-quantity").style.display = "block";
+                //document.getElementById("assure-plans-quantity").style.visibility = "visible";
 
-                document.getElementById("activation-plans-quantity").style.display = "block";
-                document.getElementById("activation-plans-quantity").style.visibility = "visible";
+                //document.getElementById("activation-plans-quantity").style.display = "block";
+                //document.getElementById("activation-plans-quantity").style.visibility = "visible";
 
             });
 
@@ -570,98 +570,125 @@
 
             // stations
             var selectedStationsItems = document.getElementById("stations-listbox-control");
-            var selectedStationsValues = selectedStationsItems.options[selectedStationsItems.selectedIndex].value;
+            var selectedStationsValues = null;
+            if(selectedStationsItems.options[selectedStationsItems.selectedIndex] != null)
+            {
+                selectedStationsValues = selectedStationsItems.options[selectedStationsItems.selectedIndex].value;
+            };
+            
             var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var stationsTableBody = $("#stations-table tbody");
             
             if (selectedStationsValues != null) {
+                document.getElementById("station-quantity").style.display = "block";
+                document.getElementById("station-quantity").style.visibility = "visible";
                 stationsTableBodyRowsHtml = "";
-            }
             
-            for (var i = 0; i < 1; i++) {
-                var stationsTableRowHtml = "<tr><td>" + selectedStationsValues + "</td><td>" + 
-                    selectedStationsValues + "</td><td style='text-align:center'>" + selectedStationsValues + 
-                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                stationsTableBodyRowsHtml += stationsTableRowHtml;
-            }
+                for (var i = 0; i < 1; i++) {
+                    var stationsTableRowHtml = "<tr><td>" + selectedStationsValues + "</td><td>" + 
+                        selectedStationsValues + "</td><td style='text-align:center'>" + selectedStationsValues + 
+                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                    stationsTableBodyRowsHtml += stationsTableRowHtml;
+                }
             
-            stationsTableBody.html(stationsTableBodyRowsHtml);
+                stationsTableBody.html(stationsTableBodyRowsHtml);
+            }
 
             // kits
             var selectedKitsItems = document.getElementById("kits-listbox-control");
-            var selectedKitsValues = selectedKitsItems.options[selectedKitsItems.selectedIndex].value;
+            var selectedKitsValues = null;
+            if(selectedKitsItems.options[selectedKitsItems.selectedIndex] != null){
+                selectedKitsValues = selectedKitsItems.options[selectedKitsItems.selectedIndex].value;
+            }
             var kitsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var kitsTableBody = $("#kits-table tbody");
             
             if (selectedKitsValues != null) {
+                document.getElementById("kit-quantity").style.display = "block";
+                document.getElementById("kit-quantity").style.visibility = "visible";
                 kitsTableBodyRowsHtml = "";
-            }
             
-            for (var i = 0; i < 1; i++) {
-                var kitsTableRowHtml = "<tr><td>" + selectedKitsValues + "</td><td>" + 
-                    selectedKitsValues + "</td><td style='text-align:center'>" + selectedKitsValues + 
-                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                kitsTableBodyRowsHtml += kitsTableRowHtml;
-            }
+                for (var i = 0; i < 1; i++) {
+                    var kitsTableRowHtml = "<tr><td>" + selectedKitsValues + "</td><td>" + 
+                        selectedKitsValues + "</td><td style='text-align:center'>" + selectedKitsValues + 
+                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                    kitsTableBodyRowsHtml += kitsTableRowHtml;
+                }
 
-            kitsTableBody.html(kitsTableBodyRowsHtml);
+                kitsTableBody.html(kitsTableBodyRowsHtml);
+            }
 
             // cloud plans
             var selectedCloudPlanItems = document.getElementById("cloud-plans-listbox-control");
-            var selectedCloudPlanValues = selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex].value;
+            var selectedCloudPlanValues = null;
+            if(selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex] != null) {
+                selectedCloudPlanValues = selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex].value;
+            }
             var selectedCloudPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var selectedCloudPlansTableBody = $("#cloud-plans-table tbody");
             
             if (selectedCloudPlanValues != null) {
+                document.getElementById("cloud-plans-quantity").style.display = "block";
+                document.getElementById("cloud-plans-quantity").style.visibility = "visible";
                 selectedCloudPlansTableBodyRowsHtml = "";
-            }
             
-            for (var i = 0; i < 1; i++) {
-                var cloudPlansTableRowHtml = "<tr><td>" + selectedCloudPlanValues + "</td><td>" + 
-                    selectedCloudPlanValues + "</td><td style='text-align:center'>" + selectedCloudPlanValues + 
-                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
-            }
+                for (var i = 0; i < 1; i++) {
+                    var cloudPlansTableRowHtml = "<tr><td>" + selectedCloudPlanValues + "</td><td>" + 
+                        selectedCloudPlanValues + "</td><td style='text-align:center'>" + selectedCloudPlanValues + 
+                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                    selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
+                }
 
-            selectedCloudPlansTableBody.html(selectedCloudPlansTableBodyRowsHtml);
+                selectedCloudPlansTableBody.html(selectedCloudPlansTableBodyRowsHtml);
+            }
 
             // assure plans
             var selectedAssurePlanItems = document.getElementById("assure-plans-listbox-control");
-            var selectedAssurePlanValues = selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex].value;
+            var selectedAssurePlanValues = null;
+            if(selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex] != null) {
+                selectedAssurePlanValues = selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex].value;
+            }
             var selectedAssurePlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var selectedAssurePlansTableBody = $("#assure-plans-table tbody");
             
             if (selectedAssurePlanValues != null) {
+                document.getElementById("assure-plans-quantity").style.display = "block";
+                document.getElementById("assure-plans-quantity").style.visibility = "visible";
                 selectedAssurePlansTableBodyRowsHtml = "";
-            }
             
-            for (var i = 0; i < 1; i++) {
-                var assurePlansTableRowHtml = "<tr><td>" + selectedAssurePlanValues + "</td><td>" + 
-                    selectedAssurePlanValues + "</td><td style='text-align:center'>" + selectedAssurePlanValues + 
-                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
-            }
+                for (var i = 0; i < 1; i++) {
+                    var assurePlansTableRowHtml = "<tr><td>" + selectedAssurePlanValues + "</td><td>" + 
+                        selectedAssurePlanValues + "</td><td style='text-align:center'>" + selectedAssurePlanValues + 
+                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                    selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
+                }
 
-            selectedAssurePlansTableBody.html(selectedAssurePlansTableBodyRowsHtml);
+                selectedAssurePlansTableBody.html(selectedAssurePlansTableBodyRowsHtml);
+            }
             
             // activation plans
             var selectedActivationPlanItems = document.getElementById("activation-items-listbox-control");
-            var selectedActivationPlanValues = selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex].value;
+            var selectedActivationPlanValues = null;
+            if(selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex] != null) {
+                selectedActivationPlanValues = selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex].value;
+            }
             var selectedActivationPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
             var selectedActivationPlansTableBody = $("#activation-plans-table tbody");
             
             if (selectedActivationPlanValues != null) {
+                document.getElementById("activation-plans-quantity").style.display = "block";
+                document.getElementById("activation-plans-quantity").style.visibility = "visible";
                 selectedActivationPlansTableBodyRowsHtml = "";
-            }
-            
-            for (var i = 0; i < 1; i++) {
-                var activationPlansTableRowHtml = "<tr><td>" + selectedActivationPlanValues + "</td><td>" + 
-                    selectedActivationPlanValues + "</td><td style='text-align:center'>" + selectedActivationPlanValues + 
-                    "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
-            }
 
-            selectedActivationPlansTableBody.html(selectedActivationPlansTableBodyRowsHtml);
+                for (var i = 0; i < 1; i++) {
+                    var activationPlansTableRowHtml = "<tr><td>" + selectedActivationPlanValues + "</td><td>" + 
+                        selectedActivationPlanValues + "</td><td style='text-align:center'>" + selectedActivationPlanValues + 
+                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                    selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
+                }
+
+                selectedActivationPlansTableBody.html(selectedActivationPlansTableBodyRowsHtml);
+            }
 
         };
 
