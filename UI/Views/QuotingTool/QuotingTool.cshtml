@@ -84,7 +84,7 @@
                             @Html.HiddenFor(m => m.NavCategory, new { @Value = "kits" })
                             @Html.HiddenFor(m => m.SelectedProductsList)
                             @Html.ListBoxFor(m => m.SelectedActivationItemsList, Model.ActivationDataList, new Dictionary<string, object>() {{"class", "form-control"}, 
-                                {"style", "width:100%;height:150px"}, {"id", "activation-items-listbox-control"}})
+                                {"style", "width:100%;height:150px"}, {"id", "activation-plans-listbox-control"}})
                         </div>
                     </div>
                 </div>
@@ -112,10 +112,10 @@
                         <table id="stations-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
+                                    <th style="width:75px">Code</th>
                                     <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
+                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px; text-align:center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -137,10 +137,10 @@
                         <table id="kits-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
+                                    <th style="width:75px">Code</th>
                                     <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
+                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px; text-align:center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -252,15 +252,24 @@
  
             // variables to store the data
             var navCategory = @Html.Raw(Json.Encode(Model.NavCategory));
-            var stationsTableData = @Html.Raw(Json.Encode(Model.SelectedProductsData));
-            var kitsTableData = @Html.Raw(Json.Encode(Model.SelectedKitsData));
+            var stationsData = @Html.Raw(Json.Encode(Model.ProductDataList));
+            var kitsData = @Html.Raw(Json.Encode(Model.KitDataList));
+            var cloudPlansData = @Html.Raw(Json.Encode(Model.CloudPlanDataList));
+            var assurePlansData = @Html.Raw(Json.Encode(Model.AssurePlanDataList));
+            var activationPlansData = @Html.Raw(Json.Encode(Model.ActivationDataList));
 
             // variables for html elements
-            var stationsListbox = $('#stations-listbox');
-            var kitsListbox = $('#kits-listbox');
-            var cloudPlansListbox = $('#cloud-plans-listbox');
-            var assurePlansListbox = $('#assure-plans-listbox');
-            var activationPlansListbox = $('#activation-plans-listbox');
+            var stationsListBoxDiv = $('#stations-listbox');
+            var kitsListBoxDiv = $('#kits-listbox');
+            var cloudPlansListBoxDiv = $('#cloud-plans-listbox');
+            var assurePlansListBoxDiv = $('#assure-plans-listbox');
+            var activationPlansListBoxDiv = $('#activation-plans-listbox');
+
+            var stationsListBoxControl = $('#stations-listbox-control');
+            var kitsListBoxControl = $('#kits-listbox-control');
+            var cloudPlansListBoxControl = $('#cloud-plans-listbox-control');
+            var assurePlansListBoxControl = $('#assure-plans-listbox-control');
+            var activationPlansListBoxControl = $('#activation-plans-listbox-control');
 
             var navMenu = $('#main-nav-list-items');
             var stationsNavText = $('#stations-nav-text');
@@ -281,101 +290,61 @@
             var previousButton = $('#previous-btn');
 
             // set initial element style
-            stationsListbox.css('display', 'block');
-            stationsNavText.css('font-weight', 'bold');
-            previousButton.css('display', 'none');
+            setBoldNavText(stationsNavText.attr('id'));
+            showHideListBoxes(stationsListBoxDiv.attr('id'));
+            showHideNavButtons(stationsNavText.attr('id'));
 
             stationsNavText.click(function(e) {
-                stationsListbox.css('display', 'block');
-                kitsListbox.css('display', 'none');
-                cloudPlansListbox.css('display', 'none');
-                assurePlansListbox.css('display', 'none');
-                activationPlansListbox.css('display', 'none');
-
                 setBoldNavText(stationsNavText.attr('id'));
-
-                hideQuantityDivs();
-
-                nextButton.css('display', 'block');
-                previousButton.css('display', 'none');
+                showHideListBoxes(stationsListBoxDiv.attr('id'));
+                showHideNavButtons(stationsNavText.attr('id'));
             });
 
             kitsNavText.click(function(e) {
-                stationsListbox.css('display', 'none');
-                kitsListbox.css({'display':'block', 'visibility':'visible'});
-                cloudPlansListbox.css('display', 'none');
-                assurePlansListbox.css('display', 'none');
-                activationPlansListbox.css('display', 'none');
-
                 setBoldNavText(kitsNavText.attr('id'));
-
-                hideQuantityDivs();
-
-                nextButton.css('display', 'block');
-                previousButton.css('display', 'block');
+                showHideListBoxes(kitsListBoxDiv.attr('id'));
+                showHideNavButtons(kitsNavText.attr('id'));
             });
 
             cloudPlansNavText.click(function(e) {
-                stationsListbox.css('display', 'none');
-                kitsListbox.css('display', 'none');
-                cloudPlansListbox.css({'display':'block', 'visibility':'visible'});
-                assurePlansListbox.css('display', 'none');
-                activationPlansListbox.css('display', 'none');
-
                 setBoldNavText(cloudPlansNavText.attr('id'));
-
-                hideQuantityDivs();
-
-                nextButton.css('display', 'block');
-                previousButton.css('display', 'block');
+                showHideListBoxes(cloudPlansListBoxDiv.attr('id'));
+                showHideNavButtons(cloudPlansNavText.attr('id'));
             });
 
             assurePlansNavText.click(function(e) {
-                stationsListbox.css('display', 'none');
-                kitsListbox.css('display', 'none');
-                cloudPlansListbox.css('display', 'none');
-                assurePlansListbox.css({'display':'block', 'visibility':'visible'});
-                activationPlansListbox.css('display', 'none');
-
                 setBoldNavText(assurePlansNavText.attr('id'));
-
-                hideQuantityDivs();
-
-                nextButton.css('display', 'block');
-                previousButton.css('display', 'block');
+                showHideListBoxes(assurePlansListBoxDiv.attr('id'));
+                showHideNavButtons(assurePlansNavText.attr('id'));
             });
 
             activationPlansNavText.click(function(e) {
-                stationsListbox.css('display', 'none');
-                kitsListbox.css('display', 'none');
-                cloudPlansListbox.css('display', 'none');
-                assurePlansListbox.css('display', 'none');
-                activationPlansListbox.css({'display':'block', 'visibility':'visible'});
-
                 setBoldNavText(activationPlansNavText.attr('id'));
-
-                hideQuantityDivs();
-
-                nextButton.css('display', 'block');
-                previousButton.css('display', 'block');
+                showHideListBoxes(activationPlansListBoxDiv.attr('id'));
+                showHideNavButtons(activationPlansNavText.attr('id'));
             });
 
             quantitiesNavText.click(function(e) {
-                stationsListbox.css('display', 'none');
-                kitsListbox.css('display', 'none');
-                cloudPlansListbox.css('display', 'none');
-                assurePlansListbox.css('display', 'none');
-                activationPlansListbox.css('display', 'none');
-
                 setBoldNavText(quantitiesNavText.attr('id'));
-
+                showHideListBoxes(quantitiesNavText.attr('id')); // hides all listboxes
+                
                 quantityDivHeader.css({'visibility':'visible','display':'block'});
 
                 buildQuantityTables();
 
-                nextButton.css('display', 'none');
-                previousButton.css('display', 'block');
+                showHideNavButtons(quantitiesNavText.attr('id'));
             });
+
+            function showHideListBoxes(id) {
+                var listBoxes = $('form').find('.row');
+                listBoxes.each(function (){
+                    if($(this).attr('id') == id) {
+                        $(this).css({'visibility':'visible','display':'block'});
+                    } else {
+                        $(this).css({'visibility':'hidden','display':'none'});
+                    }
+                })
+            }
 
             function setBoldNavText(id) {
                 var navItems = navMenu.find('a');
@@ -388,14 +357,136 @@
                 })
             }
 
-            function hideQuantityDivs() {
-                quantityDivHeader.css({'visibility':'hidden','display':'none'});
-                stationQuantityHeader.css({'visibility':'hidden','display':'none'});
-                kitQuantityHeader.css({'visibility':'hidden','display':'none'});
-                cloudPlansQuantityHeader.css({'visibility':'hidden','display':'none'});
-                assurePlansQuantityHeader.css({'visibility':'hidden','display':'none'});
-                activationPlansQuantityHeader.css({'visibility':'hidden','display':'none'});
-            };
+            function showHideNavButtons(id) {
+                switch(id) {
+                    case stationsNavText.attr('id'):
+                        nextButton.css('display', 'block');
+                        previousButton.css('display', 'none');
+                        break;
+                    case quantitiesNavText.attr('id'):
+                        nextButton.css('display', 'none');
+                        previousButton.css('display', 'block');
+                        break;
+                    default:
+                        nextButton.css('display', 'block');
+                        previousButton.css('display', 'block');
+                }
+            }
+
+            function buildQuantityTables() {
+                // get selected values
+                var selectedStationsValues = null;
+                var selectedKitsValues = null;
+                var selectedCloudPlanValues = null; 
+                var selectedAssurePlanValues = null;
+                var selectedActivationPlanValues = null;
+
+                selectedStationsValues = stationsListBoxControl.find(':selected').text();
+                selectedKitsValues = kitsListBoxControl.find(':selected').text();
+                selectedCloudPlanValues = cloudPlansListBoxControl.find(':selected').text();
+                selectedAssurePlanValues = assurePlansListBoxControl.find(':selected').text();
+                selectedActivationPlanValues = activationPlansListBoxControl.find(':selected').text();
+
+                // build station table
+                var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+                var stationsTableBody = $('#stations-table tbody');
+            
+                if (selectedStationsValues.length > 0) {
+                    stationQuantityHeader.css({'visibility':'visible','display':'block'});
+                    stationsTableBodyRowsHtml = "";
+            
+                    for (var i = 0; i < 1; i++) {
+                        var stationsTableRowHtml = 
+                            "<tr><td>" + stationsData[stationsListBoxControl.prop('selectedIndex')].Value + 
+                            "</td><td>" + stationsData[stationsListBoxControl.prop('selectedIndex')].Text + 
+                            "</td><td style='text-align:center'>" + "" + 
+                            "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+                        stationsTableBodyRowsHtml += stationsTableRowHtml;
+                    }
+            
+                    stationsTableBody.html(stationsTableBodyRowsHtml);
+                }
+
+                // build kits table
+                var kitsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+                var kitsTableBody = $("#kits-table tbody");
+            
+                if (selectedKitsValues.length > 0) {
+                    kitQuantityHeader.css({'visibility':'visible','display':'block'});
+                    kitsTableBodyRowsHtml = "";
+            
+                    for (var i = 0; i < 1; i++) {
+                        var kitsTableRowHtml = 
+                            "<tr><td>" + kitsData[kitsListBoxControl.prop('selectedIndex')].Value + 
+                            "</td><td>" + kitsData[kitsListBoxControl.prop('selectedIndex')].Text + 
+                            "</td><td style='text-align:center'>" + "" + 
+                            "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+                        kitsTableBodyRowsHtml += kitsTableRowHtml;
+                    }
+
+                    kitsTableBody.html(kitsTableBodyRowsHtml);
+                }
+
+                // build cloud plans table
+                var selectedCloudPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+                var selectedCloudPlansTableBody = $("#cloud-plans-table tbody");
+            
+                if (selectedCloudPlanValues.length > 0) {
+                    cloudPlansQuantityHeader.css({'visibility':'visible','display':'block'});
+                    selectedCloudPlansTableBodyRowsHtml = "";
+            
+                    for (var i = 0; i < 1; i++) {
+                        var cloudPlansTableRowHtml = 
+                            "<tr><td class='product-code-column'>" + cloudPlansData[cloudPlansListBoxControl.prop('selectedIndex')].Value + 
+                            "</td><td>" + cloudPlansData[cloudPlansListBoxControl.prop('selectedIndex')].Text + 
+                            "</td><td style='text-align:center'>" + "" + 
+                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
+                    }
+
+                    selectedCloudPlansTableBody.html(selectedCloudPlansTableBodyRowsHtml);
+                }
+
+                // build assure plans table
+                var selectedAssurePlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+                var selectedAssurePlansTableBody = $("#assure-plans-table tbody");
+            
+                if (selectedAssurePlanValues.length > 0) {
+                    assurePlansQuantityHeader.css({'visibility':'visible','display':'block'});
+                    selectedAssurePlansTableBodyRowsHtml = "";
+            
+                    for (var i = 0; i < 1; i++) {
+                        var assurePlansTableRowHtml = 
+                            "<tr><td class='product-code-column'>" + assurePlansData[assurePlansListBoxControl.prop('selectedIndex')].Value + 
+                            "</td><td>" + assurePlansData[assurePlansListBoxControl.prop('selectedIndex')].Text + 
+                            "</td><td style='text-align:center'>" + "" + 
+                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
+                    }
+
+                    selectedAssurePlansTableBody.html(selectedAssurePlansTableBodyRowsHtml);
+                }
+
+                // build activation plans table
+                var selectedActivationPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
+                var selectedActivationPlansTableBody = $("#activation-plans-table tbody");
+            
+                if (selectedActivationPlanValues.length > 0) {
+                    activationPlansQuantityHeader.css({'visibility':'visible','display':'block'});
+                    selectedActivationPlansTableBodyRowsHtml = "";
+
+                    for (var i = 0; i < 1; i++) {
+                        var activationPlansTableRowHtml = 
+                            "<tr><td class='product-code-column'>" + activationPlansData[activationPlansListBoxControl.prop('selectedIndex')].Value + 
+                            "</td><td>" + cloudPlansData[activationPlansListBoxControl.prop('selectedIndex')].Text + 
+                            "</td><td style='text-align:center'>" + "" + 
+                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
+                    }
+
+                    selectedActivationPlansTableBody.html(selectedActivationPlansTableBodyRowsHtml);
+                }
+            }
 
         });
 
@@ -404,7 +495,7 @@
             
             var currentNav;
             var parent = $('#main-navbar');
-            var childAnchors = parent.getElementsByTagName('a');
+            var childAnchors = parent.find('a');
             for (i = 0; i < childAnchors.length; ++i)
             {
                 if(childAnchors[i].getAttribute('style') == "font-weight: bold;")
@@ -505,132 +596,6 @@
                         document.getElementById("kits-listbox").style.display = "none";
                         document.getElementById("stations-nav-text").style.fontWeight = "bold";           
                 }}
-        };
-
-        function buildQuantityTables() {
-
-            // stations
-            var selectedStationsItems = document.getElementById("stations-listbox-control");
-            var selectedStationsValues = null;
-            if(selectedStationsItems.options[selectedStationsItems.selectedIndex] != null)
-            {
-                selectedStationsValues = selectedStationsItems.options[selectedStationsItems.selectedIndex].value;
-            };
-            
-            var stationsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-            var stationsTableBody = $("#stations-table tbody");
-            
-            if (selectedStationsValues != null) {
-                document.getElementById("station-quantity").style.display = "block";
-                document.getElementById("station-quantity").style.visibility = "visible";
-                stationsTableBodyRowsHtml = "";
-            
-                for (var i = 0; i < 1; i++) {
-                    var stationsTableRowHtml = "<tr><td>" + selectedStationsValues + "</td><td>" + 
-                        selectedStationsValues + "</td><td style='text-align:center'>" + selectedStationsValues + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    stationsTableBodyRowsHtml += stationsTableRowHtml;
-                }
-            
-                stationsTableBody.html(stationsTableBodyRowsHtml);
-            }
-
-            // kits
-            var selectedKitsItems = document.getElementById("kits-listbox-control");
-            var selectedKitsValues = null;
-            if(selectedKitsItems.options[selectedKitsItems.selectedIndex] != null){
-                selectedKitsValues = selectedKitsItems.options[selectedKitsItems.selectedIndex].value;
-            }
-            var kitsTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-            var kitsTableBody = $("#kits-table tbody");
-            
-            if (selectedKitsValues != null) {
-                document.getElementById("kit-quantity").style.display = "block";
-                document.getElementById("kit-quantity").style.visibility = "visible";
-                kitsTableBodyRowsHtml = "";
-            
-                for (var i = 0; i < 1; i++) {
-                    var kitsTableRowHtml = "<tr><td>" + selectedKitsValues + "</td><td>" + 
-                        selectedKitsValues + "</td><td style='text-align:center'>" + selectedKitsValues + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    kitsTableBodyRowsHtml += kitsTableRowHtml;
-                }
-
-                kitsTableBody.html(kitsTableBodyRowsHtml);
-            }
-
-            // cloud plans
-            var selectedCloudPlanItems = document.getElementById("cloud-plans-listbox-control");
-            var selectedCloudPlanValues = null;
-            if(selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex] != null) {
-                selectedCloudPlanValues = selectedCloudPlanItems.options[selectedCloudPlanItems.selectedIndex].value;
-            }
-            var selectedCloudPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-            var selectedCloudPlansTableBody = $("#cloud-plans-table tbody");
-            
-            if (selectedCloudPlanValues != null) {
-                document.getElementById("cloud-plans-quantity").style.display = "block";
-                document.getElementById("cloud-plans-quantity").style.visibility = "visible";
-                selectedCloudPlansTableBodyRowsHtml = "";
-            
-                for (var i = 0; i < 1; i++) {
-                    var cloudPlansTableRowHtml = "<tr><td>" + selectedCloudPlanValues + "</td><td>" + 
-                        selectedCloudPlanValues + "</td><td style='text-align:center'>" + selectedCloudPlanValues + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
-                }
-
-                selectedCloudPlansTableBody.html(selectedCloudPlansTableBodyRowsHtml);
-            }
-
-            // assure plans
-            var selectedAssurePlanItems = document.getElementById("assure-plans-listbox-control");
-            var selectedAssurePlanValues = null;
-            if(selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex] != null) {
-                selectedAssurePlanValues = selectedAssurePlanItems.options[selectedAssurePlanItems.selectedIndex].value;
-            }
-            var selectedAssurePlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-            var selectedAssurePlansTableBody = $("#assure-plans-table tbody");
-            
-            if (selectedAssurePlanValues != null) {
-                document.getElementById("assure-plans-quantity").style.display = "block";
-                document.getElementById("assure-plans-quantity").style.visibility = "visible";
-                selectedAssurePlansTableBodyRowsHtml = "";
-            
-                for (var i = 0; i < 1; i++) {
-                    var assurePlansTableRowHtml = "<tr><td>" + selectedAssurePlanValues + "</td><td>" + 
-                        selectedAssurePlanValues + "</td><td style='text-align:center'>" + selectedAssurePlanValues + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
-                }
-
-                selectedAssurePlansTableBody.html(selectedAssurePlansTableBodyRowsHtml);
-            }
-            
-            // activation plans
-            var selectedActivationPlanItems = document.getElementById("activation-items-listbox-control");
-            var selectedActivationPlanValues = null;
-            if(selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex] != null) {
-                selectedActivationPlanValues = selectedActivationPlanItems.options[selectedActivationPlanItems.selectedIndex].value;
-            }
-            var selectedActivationPlansTableBodyRowsHtml = "<tr class='odd-table-row'><td class='text-center' colspan=3>No data found</tr></td>";
-            var selectedActivationPlansTableBody = $("#activation-plans-table tbody");
-            
-            if (selectedActivationPlanValues != null) {
-                document.getElementById("activation-plans-quantity").style.display = "block";
-                document.getElementById("activation-plans-quantity").style.visibility = "visible";
-                selectedActivationPlansTableBodyRowsHtml = "";
-
-                for (var i = 0; i < 1; i++) {
-                    var activationPlansTableRowHtml = "<tr><td>" + selectedActivationPlanValues + "</td><td>" + 
-                        selectedActivationPlanValues + "</td><td style='text-align:center'>" + selectedActivationPlanValues + 
-                        "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
-                    selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
-                }
-
-                selectedActivationPlansTableBody.html(selectedActivationPlansTableBodyRowsHtml);
-            }
-
         };
 
     </script>
