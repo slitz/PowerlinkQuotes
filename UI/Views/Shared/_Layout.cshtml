@@ -9,6 +9,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     @System.Web.Optimization.Styles.Render("~/Content/css")
+    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
 </head>
 <body style="margin:0;padding:0">
     <div>
@@ -29,7 +30,7 @@
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <div id="main-navbar" class="navbar-collapse collapse">
-                            <ol class="nav nav-pills nav-justified" style="padding-top:4px">
+                            <ol class="nav nav-pills nav-justified" id="main-nav-list-items" style="padding-top:4px">
                                 <li>
                                     <a id="stations-nav-text" href="#">1. Stations</a>
                                 </li>
@@ -58,7 +59,6 @@
         @RenderBody()
     </div>
 
-    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
     @System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

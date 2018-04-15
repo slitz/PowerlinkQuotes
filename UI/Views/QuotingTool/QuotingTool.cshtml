@@ -249,218 +249,161 @@
 {
     <script type="text/javascript">
         $(document).ready(function () {
-
+ 
+            // variables to store the data
             var navCategory = @Html.Raw(Json.Encode(Model.NavCategory));
             var stationsTableData = @Html.Raw(Json.Encode(Model.SelectedProductsData));
             var kitsTableData = @Html.Raw(Json.Encode(Model.SelectedKitsData));
 
-            document.getElementById("stations-listbox").style.display = "block";
-            document.getElementById("stations-nav-text").style.fontWeight = "bold";
-            document.getElementById("previous-btn").style.display = "none";
+            // variables for html elements
+            var stationsListbox = $('#stations-listbox');
+            var kitsListbox = $('#kits-listbox');
+            var cloudPlansListbox = $('#cloud-plans-listbox');
+            var assurePlansListbox = $('#assure-plans-listbox');
+            var activationPlansListbox = $('#activation-plans-listbox');
 
-            $("#stations-nav-text").click(function(e) {
-                document.getElementById("stations-listbox").style.display = "block";
-                document.getElementById("kits-listbox").style.display = "none";
-                document.getElementById("cloud-plans-listbox").style.display = "none";
-                document.getElementById("assure-plans-listbox").style.display = "none";
-                document.getElementById("activation-plans-listbox").style.display = "none";
+            var navMenu = $('#main-nav-list-items');
+            var stationsNavText = $('#stations-nav-text');
+            var kitsNavText = $('#kits-nav-text');
+            var cloudPlansNavText = $('#cloud-plans-nav-text');
+            var assurePlansNavText = $('#assure-plans-nav-text');
+            var activationPlansNavText = $('#activation-plans-nav-text');
+            var quantitiesNavText = $('#quantities-nav-text');
+            
+            var quantityDivHeader = $('#header-quantity');
+            var stationQuantityHeader = $('#station-quantity');
+            var kitQuantityHeader = $('#kit-quantity');
+            var cloudPlansQuantityHeader = $('#cloud-plans-quantity');
+            var assurePlansQuantityHeader = $('#assure-plans-quantity');
+            var activationPlansQuantityHeader = $('#activation-plans-quantity');
 
-                document.getElementById("stations-nav-text").style.fontWeight = "bold";
-                document.getElementById("kits-nav-text").style.fontWeight = "normal";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+            var nextButton = $('#next-btn');
+            var previousButton = $('#previous-btn');
 
-                document.getElementById("header-quantity").style.visibility = "hidden";
-                document.getElementById("header-quantity").style.display = "none";
-                document.getElementById("station-quantity").style.visibility = "hidden";
-                document.getElementById("station-quantity").style.display = "none";
-                document.getElementById("kit-quantity").style.visibility = "hidden";
-                document.getElementById("kit-quantity").style.display = "none";
-                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
-                document.getElementById("cloud-plans-quantity").style.display = "none";
-                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
-                document.getElementById("assure-plans-quantity").style.display = "none";
-                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
-                document.getElementById("activation-plans-quantity").style.display = "none";
+            // set initial element style
+            stationsListbox.css('display', 'block');
+            stationsNavText.css('font-weight', 'bold');
+            previousButton.css('display', 'none');
 
-                document.getElementById("next-btn").style.display = "block";
-                document.getElementById("previous-btn").style.display = "none";
+            stationsNavText.click(function(e) {
+                stationsListbox.css('display', 'block');
+                kitsListbox.css('display', 'none');
+                cloudPlansListbox.css('display', 'none');
+                assurePlansListbox.css('display', 'none');
+                activationPlansListbox.css('display', 'none');
+
+                setBoldNavText(stationsNavText.attr('id'));
+
+                hideQuantityDivs();
+
+                nextButton.css('display', 'block');
+                previousButton.css('display', 'none');
             });
 
-            $("#kits-nav-text").click(function(e) {
-                document.getElementById("cloud-plans-listbox").style.display = "none";
-                document.getElementById("kits-listbox").style.display = "block";
-                document.getElementById("kits-listbox").style.visibility = "visible";
-                document.getElementById("stations-listbox").style.display = "none";
-                document.getElementById("assure-plans-listbox").style.display = "none";
-                document.getElementById("activation-plans-listbox").style.display = "none";
+            kitsNavText.click(function(e) {
+                stationsListbox.css('display', 'none');
+                kitsListbox.css({'display':'block', 'visibility':'visible'});
+                cloudPlansListbox.css('display', 'none');
+                assurePlansListbox.css('display', 'none');
+                activationPlansListbox.css('display', 'none');
 
-                document.getElementById("stations-nav-text").style.fontWeight = "normal";
-                document.getElementById("kits-nav-text").style.fontWeight = "bold";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+                setBoldNavText(kitsNavText.attr('id'));
 
-                document.getElementById("header-quantity").style.visibility = "hidden";
-                document.getElementById("header-quantity").style.display = "none";
-                document.getElementById("station-quantity").style.visibility = "hidden";
-                document.getElementById("station-quantity").style.display = "none";
-                document.getElementById("kit-quantity").style.visibility = "hidden";
-                document.getElementById("kit-quantity").style.display = "none";
-                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
-                document.getElementById("cloud-plans-quantity").style.display = "none";
-                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
-                document.getElementById("assure-plans-quantity").style.display = "none";
-                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
-                document.getElementById("activation-plans-quantity").style.display = "none";
+                hideQuantityDivs();
 
-                document.getElementById("next-btn").style.display = "block";
-                document.getElementById("previous-btn").style.display = "block";
+                nextButton.css('display', 'block');
+                previousButton.css('display', 'block');
             });
 
-            $("#cloud-plans-nav-text").click(function(e) {
-                document.getElementById("stations-listbox").style.display = "none";
-                document.getElementById("kits-listbox").style.display = "none";
-                document.getElementById("cloud-plans-listbox").style.display = "block";
-                document.getElementById("cloud-plans-listbox").style.visibility = "visible";
-                document.getElementById("assure-plans-listbox").style.display = "none";
-                document.getElementById("activation-plans-listbox").style.display = "none";
+            cloudPlansNavText.click(function(e) {
+                stationsListbox.css('display', 'none');
+                kitsListbox.css('display', 'none');
+                cloudPlansListbox.css({'display':'block', 'visibility':'visible'});
+                assurePlansListbox.css('display', 'none');
+                activationPlansListbox.css('display', 'none');
 
-                document.getElementById("stations-nav-text").style.fontWeight = "normal";
-                document.getElementById("kits-nav-text").style.fontWeight = "normal";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "bold";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+                setBoldNavText(cloudPlansNavText.attr('id'));
 
-                document.getElementById("header-quantity").style.visibility = "hidden";
-                document.getElementById("header-quantity").style.display = "none";
-                document.getElementById("station-quantity").style.visibility = "hidden";
-                document.getElementById("station-quantity").style.display = "none";
-                document.getElementById("kit-quantity").style.visibility = "hidden";
-                document.getElementById("kit-quantity").style.display = "none";
-                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
-                document.getElementById("cloud-plans-quantity").style.display = "none";
-                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
-                document.getElementById("assure-plans-quantity").style.display = "none";
-                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
-                document.getElementById("activation-plans-quantity").style.display = "none";
+                hideQuantityDivs();
 
-                document.getElementById("next-btn").style.display = "block";
-                document.getElementById("previous-btn").style.display = "block";
+                nextButton.css('display', 'block');
+                previousButton.css('display', 'block');
             });
 
-            $("#assure-plans-nav-text").click(function(e) {
-                document.getElementById("stations-listbox").style.display = "none";
-                document.getElementById("kits-listbox").style.display = "none";
-                document.getElementById("cloud-plans-listbox").style.display = "none";
-                document.getElementById("assure-plans-listbox").style.display = "block";
-                document.getElementById("assure-plans-listbox").style.visibility = "visible";
-                document.getElementById("activation-plans-listbox").style.display = "none";
+            assurePlansNavText.click(function(e) {
+                stationsListbox.css('display', 'none');
+                kitsListbox.css('display', 'none');
+                cloudPlansListbox.css('display', 'none');
+                assurePlansListbox.css({'display':'block', 'visibility':'visible'});
+                activationPlansListbox.css('display', 'none');
 
-                document.getElementById("stations-nav-text").style.fontWeight = "normal";
-                document.getElementById("kits-nav-text").style.fontWeight = "normal";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "bold";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+                setBoldNavText(assurePlansNavText.attr('id'));
 
-                document.getElementById("header-quantity").style.visibility = "hidden";
-                document.getElementById("header-quantity").style.display = "none";
-                document.getElementById("station-quantity").style.visibility = "hidden";
-                document.getElementById("station-quantity").style.display = "none";
-                document.getElementById("kit-quantity").style.visibility = "hidden";
-                document.getElementById("kit-quantity").style.display = "none";
-                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
-                document.getElementById("cloud-plans-quantity").style.display = "none";
-                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
-                document.getElementById("assure-plans-quantity").style.display = "none";
-                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
-                document.getElementById("activation-plans-quantity").style.display = "none";
+                hideQuantityDivs();
 
-                document.getElementById("next-btn").style.display = "block";
-                document.getElementById("previous-btn").style.display = "block";
+                nextButton.css('display', 'block');
+                previousButton.css('display', 'block');
             });
 
-            $("#activation-plans-nav-text").click(function(e) {
-                document.getElementById("stations-listbox").style.display = "none";
-                document.getElementById("kits-listbox").style.display = "none";
-                document.getElementById("cloud-plans-listbox").style.display = "none";
-                document.getElementById("assure-plans-listbox").style.display = "none";
-                document.getElementById("activation-plans-listbox").style.display = "block";
-                document.getElementById("activation-plans-listbox").style.visibility = "visible";
+            activationPlansNavText.click(function(e) {
+                stationsListbox.css('display', 'none');
+                kitsListbox.css('display', 'none');
+                cloudPlansListbox.css('display', 'none');
+                assurePlansListbox.css('display', 'none');
+                activationPlansListbox.css({'display':'block', 'visibility':'visible'});
 
-                document.getElementById("stations-nav-text").style.fontWeight = "normal";
-                document.getElementById("kits-nav-text").style.fontWeight = "normal";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "bold";
-                document.getElementById("quantities-nav-text").style.fontWeight = "normal";
+                setBoldNavText(activationPlansNavText.attr('id'));
 
-                document.getElementById("header-quantity").style.visibility = "hidden";
-                document.getElementById("header-quantity").style.display = "none";
-                document.getElementById("station-quantity").style.visibility = "hidden";
-                document.getElementById("station-quantity").style.display = "none";
-                document.getElementById("kit-quantity").style.visibility = "hidden";
-                document.getElementById("kit-quantity").style.display = "none";
-                document.getElementById("cloud-plans-quantity").style.visibility = "hidden";
-                document.getElementById("cloud-plans-quantity").style.display = "none";
-                document.getElementById("assure-plans-quantity").style.visibility = "hidden";
-                document.getElementById("assure-plans-quantity").style.display = "none";
-                document.getElementById("activation-plans-quantity").style.visibility = "hidden";
-                document.getElementById("activation-plans-quantity").style.display = "none";
+                hideQuantityDivs();
 
-                document.getElementById("next-btn").style.display = "block";
-                document.getElementById("previous-btn").style.display = "block";
+                nextButton.css('display', 'block');
+                previousButton.css('display', 'block');
             });
 
-            $("#quantities-nav-text").click(function(e) {
-                document.getElementById("stations-listbox").style.display = "none";
-                document.getElementById("kits-listbox").style.display = "none";
-                document.getElementById("cloud-plans-listbox").style.display = "none";
-                document.getElementById("assure-plans-listbox").style.display = "none";
-                document.getElementById("activation-plans-listbox").style.display = "none";
+            quantitiesNavText.click(function(e) {
+                stationsListbox.css('display', 'none');
+                kitsListbox.css('display', 'none');
+                cloudPlansListbox.css('display', 'none');
+                assurePlansListbox.css('display', 'none');
+                activationPlansListbox.css('display', 'none');
 
-                document.getElementById("stations-nav-text").style.fontWeight = "normal";
-                document.getElementById("kits-nav-text").style.fontWeight = "normal";
-                document.getElementById("cloud-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("assure-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("activation-plans-nav-text").style.fontWeight = "normal";
-                document.getElementById("quantities-nav-text").style.fontWeight = "bold";
+                setBoldNavText(quantitiesNavText.attr('id'));
 
-                document.getElementById("next-btn").style.display = "none";
-                document.getElementById("previous-btn").style.display = "block";
+                quantityDivHeader.css({'visibility':'visible','display':'block'});
 
-                // show quantity tables
-                document.getElementById("header-quantity").style.display = "block";
-                document.getElementById("header-quantity").style.visibility = "visible";
+                buildQuantityTables();
 
-                //document.getElementById("station-quantity").style.display = "block";
-                //document.getElementById("station-quantity").style.visibility = "visible";
-
-                //document.getElementById("kit-quantity").style.display = "block";
-                //document.getElementById("kit-quantity").style.visibility = "visible";
-
-                //document.getElementById("cloud-plans-quantity").style.display = "block";
-                //document.getElementById("cloud-plans-quantity").style.visibility = "visible";
-
-                //document.getElementById("assure-plans-quantity").style.display = "block";
-                //document.getElementById("assure-plans-quantity").style.visibility = "visible";
-
-                //document.getElementById("activation-plans-quantity").style.display = "block";
-                //document.getElementById("activation-plans-quantity").style.visibility = "visible";
-
+                nextButton.css('display', 'none');
+                previousButton.css('display', 'block');
             });
+
+            function setBoldNavText(id) {
+                var navItems = navMenu.find('a');
+                navItems.each(function (){
+                    if($(this).attr('id') == id) {
+                        $(this).css('font-weight', 'bold');
+                    } else {
+                        $(this).css('font-weight', 'normal');
+                    }
+                })
+            }
+
+            function hideQuantityDivs() {
+                quantityDivHeader.css({'visibility':'hidden','display':'none'});
+                stationQuantityHeader.css({'visibility':'hidden','display':'none'});
+                kitQuantityHeader.css({'visibility':'hidden','display':'none'});
+                cloudPlansQuantityHeader.css({'visibility':'hidden','display':'none'});
+                assurePlansQuantityHeader.css({'visibility':'hidden','display':'none'});
+                activationPlansQuantityHeader.css({'visibility':'hidden','display':'none'});
+            };
 
         });
 
+        // onclick function for next and previous buttons
         function determineCurrentNavAndShowAdjacentNavControls(direction) {
             
             var currentNav;
-            var parent = document.getElementById("main-navbar");
+            var parent = $('#main-navbar');
             var childAnchors = parent.getElementsByTagName('a');
             for (i = 0; i < childAnchors.length; ++i)
             {
@@ -563,8 +506,6 @@
                         document.getElementById("stations-nav-text").style.fontWeight = "bold";           
                 }}
         };
-
-        document.getElementById("quantities-nav-text").addEventListener("click", buildQuantityTables);
 
         function buildQuantityTables() {
 
