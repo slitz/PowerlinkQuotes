@@ -112,7 +112,7 @@
                         <table id="stations-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th style="width:75px">Code</th>
+                                    <th style="width:150px">Code</th>
                                     <th>Description</th>
                                     <th style="width:100px;text-align:center">Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
@@ -137,7 +137,7 @@
                         <table id="kits-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th style="width:75px">Code</th>
+                                    <th style="width:150px">Code</th>
                                     <th>Description</th>
                                     <th style="width:100px;text-align:center">Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
@@ -162,10 +162,10 @@
                         <table id="cloud-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
+                                    <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
+                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px; text-align:center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,10 +187,10 @@
                         <table id="assure-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
+                                    <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
+                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px; text-align:center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -212,10 +212,10 @@
                         <table id="activation-plans-table" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" style="float:none">
                             <thead>
                                 <tr>
-                                    <th>Code</th>
+                                    <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="text-align:center">Price</th>
-                                    <th style="text-align:center">Quantity</th>
+                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px; text-align:center">Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -257,6 +257,8 @@
             var cloudPlansData = @Html.Raw(Json.Encode(Model.CloudPlanDataList));
             var assurePlansData = @Html.Raw(Json.Encode(Model.AssurePlanDataList));
             var activationPlansData = @Html.Raw(Json.Encode(Model.ActivationDataList));
+
+            console.log(stationsData);
 
             // variables for html elements
             var stationsListBoxDiv = $('#stations-listbox');
@@ -394,13 +396,10 @@
                 if (selectedStationsValues.length > 0) {
                     stationQuantityHeader.css({'visibility':'visible','display':'block'});
                     stationsTableBodyRowsHtml = "";
-            
-                    for (var i = 0; i < 1; i++) {
-                        var stationsTableRowHtml = 
-                            "<tr><td>" + stationsData[stationsListBoxControl.prop('selectedIndex')].Value + 
-                            "</td><td>" + stationsData[stationsListBoxControl.prop('selectedIndex')].Text + 
-                            "</td><td style='text-align:center'>" + "" + 
-                            "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+                    
+                    var stationsDataJson = JSON.parse(stationsData[stationsListBoxControl.prop('selectedIndex')].Value);
+                    for (var i = 0; i < 1; i++) {    
+                        var stationsTableRowHtml = constructTableRowHtml(stationsDataJson);
                         stationsTableBodyRowsHtml += stationsTableRowHtml;
                     }
             
@@ -415,12 +414,9 @@
                     kitQuantityHeader.css({'visibility':'visible','display':'block'});
                     kitsTableBodyRowsHtml = "";
             
+                    var kitsDataJson = JSON.parse(kitsData[kitsListBoxControl.prop('selectedIndex')].Value);
                     for (var i = 0; i < 1; i++) {
-                        var kitsTableRowHtml = 
-                            "<tr><td>" + kitsData[kitsListBoxControl.prop('selectedIndex')].Value + 
-                            "</td><td>" + kitsData[kitsListBoxControl.prop('selectedIndex')].Text + 
-                            "</td><td style='text-align:center'>" + "" + 
-                            "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+                        var kitsTableRowHtml = constructTableRowHtml(kitsDataJson);
                         kitsTableBodyRowsHtml += kitsTableRowHtml;
                     }
 
@@ -435,12 +431,9 @@
                     cloudPlansQuantityHeader.css({'visibility':'visible','display':'block'});
                     selectedCloudPlansTableBodyRowsHtml = "";
             
+                    var cloudPlanDataJson = JSON.parse(cloudPlansData[cloudPlansListBoxControl.prop('selectedIndex')].Value);
                     for (var i = 0; i < 1; i++) {
-                        var cloudPlansTableRowHtml = 
-                            "<tr><td class='product-code-column'>" + cloudPlansData[cloudPlansListBoxControl.prop('selectedIndex')].Value + 
-                            "</td><td>" + cloudPlansData[cloudPlansListBoxControl.prop('selectedIndex')].Text + 
-                            "</td><td style='text-align:center'>" + "" + 
-                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        var cloudPlansTableRowHtml = constructTableRowHtml(cloudPlanDataJson);
                         selectedCloudPlansTableBodyRowsHtml += cloudPlansTableRowHtml;
                     }
 
@@ -455,12 +448,9 @@
                     assurePlansQuantityHeader.css({'visibility':'visible','display':'block'});
                     selectedAssurePlansTableBodyRowsHtml = "";
             
+                    var assurePlanDataJson = JSON.parse(assurePlansData[assurePlansListBoxControl.prop('selectedIndex')].Value);
                     for (var i = 0; i < 1; i++) {
-                        var assurePlansTableRowHtml = 
-                            "<tr><td class='product-code-column'>" + assurePlansData[assurePlansListBoxControl.prop('selectedIndex')].Value + 
-                            "</td><td>" + assurePlansData[assurePlansListBoxControl.prop('selectedIndex')].Text + 
-                            "</td><td style='text-align:center'>" + "" + 
-                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        var assurePlansTableRowHtml = constructTableRowHtml(assurePlanDataJson);
                         selectedAssurePlansTableBodyRowsHtml += assurePlansTableRowHtml;
                     }
 
@@ -475,12 +465,9 @@
                     activationPlansQuantityHeader.css({'visibility':'visible','display':'block'});
                     selectedActivationPlansTableBodyRowsHtml = "";
 
+                    var activationPlanDataJson = JSON.parse(activationPlansData[activationPlansListBoxControl.prop('selectedIndex')].Value);
                     for (var i = 0; i < 1; i++) {
-                        var activationPlansTableRowHtml = 
-                            "<tr><td class='product-code-column'>" + activationPlansData[activationPlansListBoxControl.prop('selectedIndex')].Value + 
-                            "</td><td>" + cloudPlansData[activationPlansListBoxControl.prop('selectedIndex')].Text + 
-                            "</td><td style='text-align:center'>" + "" + 
-                            "</td><td class='quantity-column'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></ tr>";
+                        var activationPlansTableRowHtml = constructTableRowHtml(activationPlanDataJson);
                         selectedActivationPlansTableBodyRowsHtml += activationPlansTableRowHtml;
                     }
 
@@ -596,6 +583,14 @@
                         document.getElementById("kits-listbox").style.display = "none";
                         document.getElementById("stations-nav-text").style.fontWeight = "bold";           
                 }}
+        };
+
+        function constructTableRowHtml(json){
+            var row = "<tr><td>" + json.OrderCode + 
+             "</td><td>" + json.Description + 
+             "</td><td style='text-align:right'>" + json.Price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + 
+             "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+            return row;
         };
 
     </script>
