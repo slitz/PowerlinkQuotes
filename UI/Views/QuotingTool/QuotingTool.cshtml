@@ -114,8 +114,9 @@
                                 <tr>
                                     <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px;text-align:center">Unit Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
+                                    <th style="width:100px; text-align:center">Line Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -139,8 +140,9 @@
                                 <tr>
                                     <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px;text-align:center">Unit Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
+                                    <th style="width:100px; text-align:center">Line Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -164,8 +166,9 @@
                                 <tr>
                                     <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px;text-align:center">Unit Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
+                                    <th style="width:100px; text-align:center">Line Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -189,8 +192,9 @@
                                 <tr>
                                     <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px;text-align:center">Unit Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
+                                    <th style="width:100px; text-align:center">Line Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,8 +218,9 @@
                                 <tr>
                                     <th style="width:150px">Code</th>
                                     <th>Description</th>
-                                    <th style="width:100px;text-align:center">Price</th>
+                                    <th style="width:100px;text-align:center">Unit Price</th>
                                     <th style="width:100px; text-align:center">Quantity</th>
+                                    <th style="width:100px; text-align:center">Line Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -511,8 +516,8 @@
                     kitsTableBodyRowsHtml = "";
             
                     var kitsDataJson = JSON.parse(kitsData[kitsListBoxControl.prop('selectedIndex')].Value);
-                    for (var i = 0; i < 1; i++) {
-                        var kitsTableRowHtml = constructTableRowHtml(kitsDataJson);
+                    for (var i = 0; i < selectedKitsValues.length; i++) {
+                        var kitsTableRowHtml = constructTableRowHtml(JSON.parse(selectedKitsValues[i].value));
                         kitsTableBodyRowsHtml += kitsTableRowHtml;
                     }
 
@@ -572,13 +577,22 @@
             } else {
                 quantityHeaderText.text("No items selected");
             }
+
+            // add event listener to quantity inputs
+            $('input').on('change click', function() {
+                var quantity = $(this).val();
+                var unitPrice = Number($(this).parent().prev().text().replace(/[^0-9\.-]+/g,""));
+                var total = quantity * unitPrice;
+                $(this).parent().next('td').text(total.toLocaleString('en-US', { style: 'currency', currency: 'USD' }));
+            });
         }
 
         function constructTableRowHtml(json){
             var row = "<tr><td>" + json.OrderCode + 
-             "</td><td>" + json.Description + 
-             "</td><td style='text-align:right'>" + json.Price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + 
-             "</td><td style='text-align:center'><input type='test' value='1' style='width:50px;text-align:center;border-color:lightgray'</td></tr>";
+                "</td><td>" + json.Description + 
+                "</td><td style='text-align:right'>" + json.Price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + 
+                "</td><td style='text-align:center'><input type='number' value='1' min='1' style='width:50px;text-align:center;border-color:lightgray'</td>" + 
+                "</td><td style='text-align:right'>" + json.Price.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + "</td></tr>";
             return row;
         };
 
