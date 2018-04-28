@@ -10,6 +10,7 @@ namespace DataAccess
     {
         product GetProductByOrderCode(string code);
         List<product> GetProductsByCategoryId(Int32 id);
+        List<product> GetProductsByTypeId(Int32 id);
     }
 
     public class DataAccess : IDataAccess
@@ -30,7 +31,7 @@ namespace DataAccess
                 }
                 catch (Exception)
                 {
-                    string.Format("unable to retrieve product by order code: {0}", code);
+                    string.Format("unable to retrieve products by order code: {0}", code);
                 }
             }
 
@@ -53,7 +54,30 @@ namespace DataAccess
                 }
                 catch (Exception)
                 {
-                    string.Format("unable to retrieve metropolitan areas");
+                    string.Format("unable to retrieve products by category id: {0}", id);
+                }
+            }
+
+            return list;
+        }
+
+        public List<product> GetProductsByTypeId(Int32 id)
+        {
+            var list = new List<product>();
+
+            using (chargepointEntities dbContext = new chargepointEntities())
+            {
+                try
+                {
+                    var query = from p in dbContext.products
+                                where p.product_type_id == id
+                                select p;
+
+                    list = query.ToList();
+                }
+                catch (Exception)
+                {
+                    string.Format("unable to retrieve products by type id: {0}", id);
                 }
             }
 

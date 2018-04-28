@@ -88,6 +88,9 @@
     <Compile Include="product_category.cs">
       <DependentUpon>PowerlinkQuotesModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="product_type.cs">
+      <DependentUpon>PowerlinkQuotesModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

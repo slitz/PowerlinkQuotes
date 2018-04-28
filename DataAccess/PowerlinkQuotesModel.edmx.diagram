@@ -7,6 +7,7 @@
       <Diagram DiagramId="8b1738efe13242fb94aa5310fe4df2b4" Name="Diagram1">
         <EntityTypeShape EntityType="chargepointModel.product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="chargepointModel.product_category" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="chargepointModel.product_type" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

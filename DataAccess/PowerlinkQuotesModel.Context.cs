@@ -27,5 +27,6 @@ namespace DataAccess
     
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<product_category> product_category { get; set; }
+        public virtual DbSet<product_type> product_type { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using UI.Models;
+using Business;
 
 namespace UI.Controllers
 {
@@ -31,11 +32,11 @@ namespace UI.Controllers
         public ActionResult QuotingTool()
         {
             var quoteBuilderModel = new QuotingToolModel();
-            quoteBuilderModel.ProductDataList = GetData(1);
-            quoteBuilderModel.KitDataList = GetData(19);
-            quoteBuilderModel.CloudPlanDataList = GetData(2);
-            quoteBuilderModel.AssurePlanDataList = GetData(4);
-            quoteBuilderModel.ActivationDataList = GetData(15);
+            quoteBuilderModel.ProductDataList = GetData((int)ProductType.Station);
+            quoteBuilderModel.KitDataList = GetData((int)ProductType.Kit);
+            quoteBuilderModel.CloudPlanDataList = GetData((int)ProductType.CloudPlan);
+            quoteBuilderModel.AssurePlanDataList = GetData((int)ProductType.AssurePlan);
+            quoteBuilderModel.ActivationDataList = GetData((int)ProductType.Activation);
             quoteBuilderModel.SelectedProductsList = new List<string>();
             quoteBuilderModel.NavCategory = "stations"; // stations is the default category when the page loads
             return View(quoteBuilderModel);
@@ -46,18 +47,15 @@ namespace UI.Controllers
         {
             if (model != null)
             {
-                model.ProductDataList = GetData(1);
-                model.KitDataList = GetData(19);
-                model.SelectedProductsData = GetSelectedItemData(model.SelectedProductsList);
-                model.SelectedKitsData = GetSelectedItemData(model.SelectedKitsList);
+                
             }
             return View(model);
         }
 
-        private List<SelectListItem> GetData(int productCategory)
+        private List<SelectListItem> GetData(int productType)
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            foreach (product product in _data.GetProductsByCategoryId(productCategory))
+            foreach (product product in _data.GetProductsByTypeId(productType))
             {
                 ItemData itemData = new ItemData () { Description = product.description, OrderCode = product.order_code,  Price = product.price };
                 list.Add(new SelectListItem

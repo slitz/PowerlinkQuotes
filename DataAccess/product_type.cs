@@ -12,12 +12,9 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class product
+    public partial class product_type
     {
-        public string order_code { get; set; }
-        public string description { get; set; }
-        public Nullable<double> price { get; set; }
-        public Nullable<int> product_category_id { get; set; }
-        public Nullable<int> product_type_id { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

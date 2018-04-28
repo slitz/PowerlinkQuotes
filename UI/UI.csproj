@@ -188,6 +188,10 @@
     <Content Include="Views\QuotingTool\QuotingTool.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business.cs\Business.cs.csproj">
+      <Project>{72b8a549-9e9e-4867-8805-02a6687d9606}</Project>
+      <Name>Business.cs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{69dba160-7f8d-4218-bc12-2a833a1abd89}</Project>
       <Name>DataAccess</Name>
