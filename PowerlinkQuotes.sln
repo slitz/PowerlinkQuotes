@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{046F98A1-2348-453F-835C-E136D8F8CA51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.cs", "Business.cs\Business.cs.csproj", "{72B8A549-9E9E-4867-8805-02A6687D9606}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business.cs\Business.csproj", "{72B8A549-9E9E-4867-8805-02A6687D9606}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
