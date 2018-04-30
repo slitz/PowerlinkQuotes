@@ -1,10 +1,4 @@
-﻿using DataAccess;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using UI.Models;
 using Business;
@@ -13,7 +7,8 @@ namespace UI.Controllers
 {
     public class QuotingToolController : Controller
     {
-        private readonly IDataAccess _data;
+        private readonly IProductData _productData;
+        private readonly IQuoteDocument _quoteDocument;
 
         public QuotingToolController()
             : this(null)
@@ -21,9 +16,10 @@ namespace UI.Controllers
 
         }
 
-        public QuotingToolController(IDataAccess data = null)
+        public QuotingToolController(IProductData productData = null, IQuoteDocument quoteDocument = null)
         {
-            _data = data ?? new DataAccess.DataAccess();
+            _productData = productData ?? new ProductData();
+            _quoteDocument = quoteDocument ?? new QuoteDocument();
         }
 
         //
@@ -32,58 +28,23 @@ namespace UI.Controllers
         public ActionResult QuotingTool()
         {
             var quoteBuilderModel = new QuotingToolModel();
-            quoteBuilderModel.ProductDataList = GetData((int)ProductType.Station);
-            quoteBuilderModel.KitDataList = GetData((int)ProductType.Kit);
-            quoteBuilderModel.CloudPlanDataList = GetData((int)ProductType.CloudPlan);
-            quoteBuilderModel.AssurePlanDataList = GetData((int)ProductType.AssurePlan);
-            quoteBuilderModel.ActivationDataList = GetData((int)ProductType.Activation);
+            quoteBuilderModel.ProductDataList = _productData.GetProductDataByProductType((int)ProductType.Station);
+            quoteBuilderModel.KitDataList = _productData.GetProductDataByProductType((int)ProductType.Kit);
+            quoteBuilderModel.CloudPlanDataList = _productData.GetProductDataByProductType((int)ProductType.CloudPlan);
+            quoteBuilderModel.AssurePlanDataList = _productData.GetProductDataByProductType((int)ProductType.AssurePlan);
+            quoteBuilderModel.ActivationDataList = _productData.GetProductDataByProductType((int)ProductType.Activation);
             quoteBuilderModel.SelectedProductsList = new List<string>();
             quoteBuilderModel.NavCategory = "stations"; // stations is the default category when the page loads
             return View(quoteBuilderModel);
         }
 
         [HttpPost]
-        public ActionResult QuotingTool(QuotingToolModel model)
+        public void QuotingTool(QuotingToolModel model)
         {
             if (model != null)
             {
-                
+                _quoteDocument.GenerateQuoteDocument();
             }
-            return View(model);
-        }
-
-        private List<SelectListItem> GetData(int productType)
-        {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (product product in _data.GetProductsByTypeId(productType))
-            {
-                ItemData itemData = new ItemData () { Description = product.description, OrderCode = product.order_code,  Price = product.price };
-                list.Add(new SelectListItem
-                {
-                    Text = String.Format("{0} - {1}", product.order_code, product.description),
-                    Value = JsonConvert.SerializeObject(itemData)
-                });
-            }
-            return list;
-        }
-
-        private List<ItemData> GetSelectedItemData(List<string> selectedProducts)
-        {
-            List<ItemData> list = new List<ItemData>();
-            if (selectedProducts != null)
-            {
-                foreach (string selectedProduct in selectedProducts)
-                {
-                    product p = _data.GetProductByOrderCode(selectedProduct);
-                    list.Add(new ItemData
-                    {
-                        OrderCode = p.order_code,
-                        Description = p.description,
-                        Price = p.price
-                    });
-                }
-            }
-            return list;
         }
     }
 }

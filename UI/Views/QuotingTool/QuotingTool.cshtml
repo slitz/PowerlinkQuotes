@@ -255,23 +255,22 @@
             </div>
         </div>
     </section>
-}
 <br />
 <br />
-
-
-<section class="container">
-    <div class="navbar navbar-default" id="next-nav-panel" style="padding:0;display:block">
-        <div class="container-fluid" style="padding-top:8px">
-            <div class="navbar-header" style="float:none">
-                <div id="navbar" class="navbar-collapse collapse">
-                    <input type="button" id="previous-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('previous')" style="float:left" value="&laquo; Previous" />
-                    <input type="button" id="next-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('next')" style="float:right" value="Next &raquo;" />
+    <section class="container">
+        <div class="navbar navbar-default" id="next-nav-panel" style="padding:0;display:block">
+            <div class="container-fluid" style="padding-top:8px">
+                <div class="navbar-header" style="float:none">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <input type="button" id="previous-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('previous')" style="float:left" value="&laquo; Previous" />
+                        <input type="button" id="next-btn" class="btn btn-default" onclick="determineCurrentNavAndShowAdjacentNavControls('next')" style="float:right" value="Next &raquo;" />
+                        <input type="submit" id="submit-btn" class="btn btn-primary" style="float:right" value="Submit" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
 
 @section scripts
 {
@@ -320,6 +319,7 @@
 
         var nextButton = $('#next-btn');
         var previousButton = $('#previous-btn');
+        var submitButton = $('#submit-btn');
 
         $(document).ready(function () {
  
@@ -485,14 +485,17 @@
                 case stationsNavText.attr('id'):
                     nextButton.css('display', 'block');
                     previousButton.css('display', 'none');
+                    submitButton.css('display', 'none');
                     break;
                 case quantitiesNavText.attr('id'):
                     nextButton.css('display', 'none');
                     previousButton.css('display', 'block');
+                    submitButton.css('display', 'block');
                     break;
                 default:
                     nextButton.css('display', 'block');
                     previousButton.css('display', 'block');
+                    submitButton.css('display', 'none');
             }
         }
 

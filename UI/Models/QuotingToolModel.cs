@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using Business.Models;
 
 namespace UI.Models
 {
@@ -18,17 +16,11 @@ namespace UI.Models
         public List<string> SelectedCloudPlansList { get; set; }
         public List<string> SelectedAssurePlansList { get; set; }
         public List<string> SelectedActivationItemsList { get; set; }
-        public List<ItemData> SelectedProductsData { get; set; }
-        public List<ItemData> SelectedKitsData { get; set; }
-        public List<ItemData> SelectedCloudPlansData { get; set; }
-        public List<ItemData> SelectedAssurePlansData { get; set; }
-        public List<ItemData> SelectedActivationData { get; set; }
+        public List<ProductDataInfo> SelectedProductsData { get; set; }
+        public List<ProductDataInfo> SelectedKitsData { get; set; }
+        public List<ProductDataInfo> SelectedCloudPlansData { get; set; }
+        public List<ProductDataInfo> SelectedAssurePlansData { get; set; }
+        public List<ProductDataInfo> SelectedActivationData { get; set; }
         public string NavCategory { get; set; }
-    }
-    public class ItemData
-    {
-        public string OrderCode { get; set; }
-        public string Description { get; set; }
-        public double? Price { get; set; }
     }
 }
