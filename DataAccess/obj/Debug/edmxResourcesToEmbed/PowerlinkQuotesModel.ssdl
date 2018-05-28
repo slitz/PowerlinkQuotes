@@ -8,6 +8,7 @@
     <Property Name="description" Type="text" />
     <Property Name="price" Type="double" />
     <Property Name="product_category_id" Type="int" />
+    <Property Name="product_type_id" Type="int" />
   </EntityType>
   <EntityType Name="product_category">
     <Key>
@@ -17,8 +18,16 @@
     <Property Name="name" Type="tinytext" />
     <Property Name="description" Type="text" />
   </EntityType>
+  <EntityType Name="product_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="tinytext" />
+  </EntityType>
   <EntityContainer Name="chargepointModelStoreContainer">
     <EntitySet Name="product" EntityType="Self.product" Schema="chargepoint" store:Type="Tables" />
     <EntitySet Name="product_category" EntityType="Self.product_category" Schema="chargepoint" store:Type="Tables" />
+    <EntitySet Name="product_type" EntityType="Self.product_type" Schema="chargepoint" store:Type="Tables" />
   </EntityContainer>
 </Schema>

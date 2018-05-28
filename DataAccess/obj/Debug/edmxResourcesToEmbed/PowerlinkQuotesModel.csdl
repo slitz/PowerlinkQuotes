@@ -8,6 +8,7 @@
     <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
     <Property Name="price" Type="Double" />
     <Property Name="product_category_id" Type="Int32" />
+    <Property Name="product_type_id" Type="Int32" />
   </EntityType>
   <EntityType Name="product_category">
     <Key>
@@ -20,5 +21,13 @@
   <EntityContainer Name="chargepointEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="products" EntityType="Self.product" />
     <EntitySet Name="product_category" EntityType="Self.product_category" />
+    <EntitySet Name="product_type" EntityType="chargepointModel.product_type" />
   </EntityContainer>
+  <EntityType Name="product_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

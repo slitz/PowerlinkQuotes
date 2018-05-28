@@ -1,0 +1,11 @@
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\DataAccess.dll.config
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\DataAccess.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\DataAccess.pdb
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\EntityFramework.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\MySql.Data.Entity.EF6.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\EntityFramework.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Release\DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Release\DataAccess.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\DataAccess\obj\Release\DataAccess.pdb

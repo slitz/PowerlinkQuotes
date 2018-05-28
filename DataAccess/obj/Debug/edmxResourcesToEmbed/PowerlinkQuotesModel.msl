@@ -4,6 +4,7 @@
     <EntitySetMapping Name="products">
       <EntityTypeMapping TypeName="chargepointModel.product">
         <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="product_type_id" ColumnName="product_type_id" />
           <ScalarProperty Name="order_code" ColumnName="order_code" />
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="price" ColumnName="price" />
@@ -17,6 +18,14 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product_type">
+      <EntityTypeMapping TypeName="chargepointModel.product_type">
+        <MappingFragment StoreEntitySet="product_type">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,0 +1,17 @@
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\Business.cs.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\Business.cs.pdb
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\obj\Debug\Business.cs.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\obj\Debug\Business.cs.pdb
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\DataAccess.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\Newtonsoft.Json.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\EntityFramework.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\DataAccess.pdb
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\Newtonsoft.Json.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\EntityFramework.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\obj\Debug\Business.cs.csprojResolveAssemblyReference.cache
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\PdfSharp.Charting.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\PdfSharp.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\PdfSharp.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\PdfSharp.Charting.xml
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\slitz\documents\visual studio 2012\Projects\PowerlinkQuotes\Business.cs\bin\Debug\de\PdfSharp.Charting.resources.dll

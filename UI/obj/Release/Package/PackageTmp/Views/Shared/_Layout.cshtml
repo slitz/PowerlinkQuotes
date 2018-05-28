@@ -1,0 +1,65 @@
+﻿﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @System.Web.Optimization.Styles.Render("~/Content/css")
+    @System.Web.Optimization.Scripts.Render("~/bundles/jquery")
+</head>
+<body style="margin:0;padding:0">
+    <div>
+        <div style="background-color:#eee;padding-top:20px">
+            <div class="container" style="text-align: center">
+                <a style="padding-top: 3px" href="/QuotingTool">
+                    <img src="~/images/logo_without_tag.jpg" width="362" style="border:solid;border-color:black;padding:15px;background-color:white"/>
+                </a>
+            </div>
+            <div style="padding-bottom:10px">
+                <h1 style="font-size:16px;font-weight:500;letter-spacing:3px;text-align:center;color: #337ab7;font-family:'Open Sans', arial, sans-serif;display:block">QUOTE BUILDER</h1>
+            </div>
+        </div>
+        <br />
+        <br />
+        <section class="container">
+            <nav class="navbar navbar-default" style="padding:0">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <div id="main-navbar" class="navbar-collapse collapse">
+                            <ol class="nav nav-pills nav-justified" id="main-nav-list-items" style="padding-top:4px">
+                                <li>
+                                    <a id="stations-nav-text" href="#">1. Stations</a>
+                                </li>
+                                <li>
+                                    <a id="kits-nav-text" href="#">2. Kits</a>
+                                </li>
+                                <li>
+                                    <a id="cloud-plans-nav-text" href="#">3. Cloud Plans</a>
+                                </li>
+                                <li>
+                                    <a id="assure-plans-nav-text"href="#">4. Assure Plans</a>
+                                </li>
+                                <li>
+                                    <a  id="activation-plans-nav-text" href="#">5. Activation & Validation</a>
+                                </li>
+                                <li>
+                                    <a id="quantities-nav-text" href="#">6. Quantities</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        @RenderBody()
+    </div>
+
+    @System.Web.Optimization.Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
